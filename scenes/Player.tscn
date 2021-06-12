@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/Chain.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/ghost.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Ghost.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Chain.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 30.9263
+height = 31.0046
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 100, 200 )
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -50 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -50 )
+shape = SubResource( 1 )
+
+[node name="Chain" type="KinematicBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -50 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 4 )

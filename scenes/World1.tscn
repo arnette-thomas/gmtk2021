@@ -1,12 +1,9 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 
 [node name="World1" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -9.53516
-margin_right = 1035.46
-margin_bottom = 626.0
-color = Color( 0, 0.415686, 1, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
