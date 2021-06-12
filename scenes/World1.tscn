@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scripts/CameraShake.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Zombie.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 541.003, 31.4458 )
@@ -46,5 +47,10 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
 shape = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 5 )]
+visible = false
 
 [connection signal="timeout" from="YSort/Player/Camera2D/Timer" to="YSort/Player/Camera2D" method="_on_Timer_timeout"]
