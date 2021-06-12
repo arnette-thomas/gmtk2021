@@ -5,6 +5,9 @@
 [ext_resource path="res://scripts/CameraShake.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Zombie.tscn" type="PackedScene" id=4]
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 538.993, 31.4458 )
+
 [node name="World1" type="Node2D"]
 
 [node name="YSort" type="YSort" parent="."]
@@ -13,6 +16,7 @@
 position = Vector2( 0, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+rotation = -0.261799
 offset = Vector2( 0, -50 )
 current = true
 zoom = Vector2( 1.5, 1.5 )
@@ -31,12 +35,16 @@ script = ExtResource( 3 )
 position = Vector2( 172, 304 )
 target_path = NodePath("../Player")
 
-[node name="icon" type="Sprite" parent="."]
-position = Vector2( 354.031, 249.64 )
+[node name="Wall" type="StaticBody2D" parent="." groups=[
+"walls",
+]]
+position = Vector2( 0, 300 )
+
+[node name="Sprite" type="Sprite" parent="Wall"]
+scale = Vector2( 16.8899, 1 )
 texture = ExtResource( 2 )
 
-[node name="icon2" type="Sprite" parent="."]
-position = Vector2( 337.213, 74.7332 )
-texture = ExtResource( 2 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+shape = SubResource( 1 )
 
 [connection signal="timeout" from="YSort/Player/Camera2D/Timer" to="YSort/Player/Camera2D" method="_on_Timer_timeout"]
