@@ -17,6 +17,7 @@ var BasicGunClass := load("res://scripts/gun/Basic.gd")
 var ShotgunClass := load("res://scripts/gun/Shotgun.gd")
 var SniperClass := load("res://scripts/gun/Sniper.gd")
 var current_gun : GunBase
+var EnemyLinked
 
 
 # Called when the node enters the scene tree for the first time.
@@ -49,5 +50,7 @@ func fire():
 #	if Input.is_action_just_pressed("ui_accept"):
 #		Globals.camera.shake(100, 0.2, 400)
 
-func _on_Chain_chain_touched(body):
-	pass # Replace with function body.
+
+func _on_Chain_enemy_hooked(body):
+	EnemyLinked=body
+	
