@@ -21,6 +21,7 @@ func generate_bullets(position : Vector2, direction : Vector2) -> Array:
 	for i in BULLETS_NUMBER :
 		var bullet_instance = bullet_scene.instance()
 		bullet_instance.speed = BULLET_SPEEEEEED
+		bullet_instance.setup(friendly)
 		bullet_instance.direction = direction.rotated(rand_range(-SPRAY_ANGLE/2, SPRAY_ANGLE/2))
 		bullet_instance.position = position
 		bullet_instances.append(bullet_instance)
