@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Enemy",
+"class": "Boss",
+"language": "GDScript",
+"path": "res://scripts/Boss.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://scripts/Zombie.gd"
 } ]
 _global_script_class_icons={
+"Boss": "",
 "Enemy": "",
 "GunBase": "",
 "Zombie": ""
