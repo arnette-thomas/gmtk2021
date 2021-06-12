@@ -7,6 +7,7 @@ extends Area2D
 onready var line = $Line
 onready var coll = $CollisionShape2D
 onready var animation = $AnimationPlayer
+onready var particles = $Particles2D
 
 signal enemy_hooked(body)
 
@@ -28,11 +29,7 @@ func _process(delta):
 		
 		# Chain break !
 		if (line.points[1] - line.points[0]).length() > hooked_enemy.max_hook_range:
-			hooked_enemy = null
-			line.scale.x = 0
-			coll.scale.x = 0
-			line.points[1] = default_line_end
-			print(line.points[1])
+			break_chain()
 		return
 		
 	if Input.is_action_just_pressed("shoot_chain") && !is_shooting:
@@ -42,6 +39,21 @@ func _process(delta):
 		animation.play("shoot")
 		is_shooting = true
 
+func break_chain():
+	var coroutine = FreezeFrame.freeze(0.1)
+	yield(coroutine, "completed")
+	
+	# particles
+	var line_length = (line.points[1] - line.points[0]).length()
+	particles.emission_rect_extents.x = line_length / 2.0
+	particles.position.x = line_length / 2.0
+	particles.rotation = Vector2.RIGHT.angle_to(line.points[1])
+	particles.restart()
+	
+	hooked_enemy = null
+	line.scale.x = 0
+	coll.scale.x = 0
+	line.points[1] = default_line_end
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "shoot":

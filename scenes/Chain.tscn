@@ -5,7 +5,7 @@
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.772549, 0, 1 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 200.404, 5.62543 )
 
 [sub_resource type="Animation" id=3]
@@ -49,10 +49,27 @@ gradient = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 200, 0 )
 scale = Vector2( 1e-05, 1 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/shoot = SubResource( 3 )
+
+[node name="Particles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 100, 0 )
+emitting = false
+amount = 80
+one_shot = true
+explosiveness = 1.0
+randomness = 0.22
+lifetime_randomness = 0.69
+emission_shape = 2
+emission_rect_extents = Vector2( 100, 1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 150.0
+angle = 30.0
+scale_amount = 3.0
+color = Color( 0.905882, 0.682353, 0.0901961, 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_Chain_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

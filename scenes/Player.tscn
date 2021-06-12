@@ -22,4 +22,3 @@ position = Vector2( 0, -29.608 )
 shape = SubResource( 1 )
 
 [node name="Chain" parent="." instance=ExtResource( 1 )]
-[connection signal="chain_touched" from="Chain" to="." method="_on_Chain_chain_touched"]

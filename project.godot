@@ -39,6 +39,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://scripts/Globals.gd"
+FreezeFrame="*res://scenes/FreezeFrame.tscn"
 
 [input]
 
