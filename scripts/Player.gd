@@ -13,6 +13,8 @@ const CAPTURE_RANGE = 150
 var capture_curr_range = 0
 const CAPTURE_GROW_SPEED = 100
 
+var main_node
+
 var fire_timer := 0.0
 
 var BasicGunClass := load("res://scripts/gun/Basic.gd")
@@ -50,7 +52,7 @@ func fire():
 	gun_visu.fire()
 	var bullets = current_gun.generate_bullets(position_centered, position_centered.direction_to(get_global_mouse_position()))
 	for b in bullets:
-		get_node("/root/bossStage").add_child(b)
+		main_node.add_child(b)
 	
 #	if Input.is_action_just_pressed("ui_accept"):
 #		Globals.camera.shake(100, 0.2, 400)
