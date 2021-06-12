@@ -12,6 +12,7 @@ onready var gun_visu := $GunVisu
 const CAPTURE_RANGE = 150
 var capture_curr_range = 0
 const CAPTURE_GROW_SPEED = 100
+const FRIENDLY := true
 
 var main_node
 
@@ -31,6 +32,7 @@ var current_gun : GunBase
 func _ready():
 	current_gun = guns[current_gun_index].new()
 	gun_visu.get_node("Sprite").texture = current_gun.image
+	current_gun.friendly = FRIENDLY
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -54,6 +56,7 @@ func _process(delta):
 		if current_gun_index == guns.size():
 			current_gun_index = 0
 		current_gun = guns[current_gun_index].new()
+		current_gun.friendly = FRIENDLY		
 		gun_visu.get_node("Sprite").texture = current_gun.image
 		
 
