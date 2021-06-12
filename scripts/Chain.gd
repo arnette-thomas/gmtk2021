@@ -14,6 +14,10 @@ signal enemy_hooked(body)
 var is_shooting = false
 var hooked_enemy : Enemy = null
 onready var default_line_end = line.points[1]
+onready var default_line_width = line.width
+
+const MIN_WIDTH = 4
+const MAX_WIDTH = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,8 +31,11 @@ func _process(delta):
 	if hooked_enemy != null:
 		line.points[1] = line.to_local(hooked_enemy.position)
 		
+		var line_length = (line.points[1] - line.points[0]).length()
+		line.width = lerp(MAX_WIDTH, MIN_WIDTH, (to_local(hooked_enemy.position) - position).length() / hooked_enemy.max_hook_range)
+		
 		# Chain break !
-		if (line.points[1] - line.points[0]).length() > hooked_enemy.max_hook_range:
+		if line_length > hooked_enemy.max_hook_range:
 			break_chain()
 		return
 		
@@ -44,16 +51,18 @@ func break_chain():
 	yield(coroutine, "completed")
 	
 	# particles
-	var line_length = (line.points[1] - line.points[0]).length()
+	var line_vector = line.points[1] - line.points[0]
+	var line_length = line_vector.length()
 	particles.emission_rect_extents.x = line_length / 2.0
-	particles.position.x = line_length / 2.0
-	particles.rotation = Vector2.RIGHT.angle_to(line.points[1])
+	particles.position = line_vector / 2.0
+	particles.rotation = Vector2.RIGHT.angle_to(line_vector)
 	particles.restart()
 	
 	hooked_enemy = null
 	line.scale.x = 0
 	coll.scale.x = 0
 	line.points[1] = default_line_end
+	line.width = default_line_width
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "shoot":
