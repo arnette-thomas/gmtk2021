@@ -46,3 +46,8 @@ func fire():
 	for b in bullets:
 		get_node("/root/World1").add_child(b)
 	
+#	if Input.is_action_just_pressed("ui_accept"):
+#		Globals.camera.shake(100, 0.2, 400)
+
+func _on_Chain_chain_touched(body):
+	pass # Replace with function body.

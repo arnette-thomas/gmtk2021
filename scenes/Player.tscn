@@ -5,8 +5,8 @@
 [ext_resource path="res://scripts/Player.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 30.9263
-height = 31.0046
+radius = 32.0107
+height = 0.0
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 100, 200 )
@@ -18,7 +18,8 @@ scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -50 )
+position = Vector2( 0, -29.608 )
 shape = SubResource( 1 )
 
 [node name="Chain" parent="." instance=ExtResource( 1 )]
+[connection signal="chain_touched" from="Chain" to="." method="_on_Chain_chain_touched"]

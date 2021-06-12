@@ -13,8 +13,20 @@ _global_script_classes=[ {
 "class": "GunBase",
 "language": "GDScript",
 "path": "res://scripts/base_gun.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://scripts/Enemy.gd"
+}, {
+"base": "Enemy",
+"class": "Zombie",
+"language": "GDScript",
+"path": "res://scripts/Zombie.gd"
 } ]
 _global_script_class_icons={
+"Enemy": "",
+"Zombie": ""
 "GunBase": ""
 }
 
@@ -23,6 +35,10 @@ _global_script_class_icons={
 config/name="gmtk2021"
 run/main_scene="res://scenes/World1.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Globals="*res://scripts/Globals.gd"
 
 [input]
 
