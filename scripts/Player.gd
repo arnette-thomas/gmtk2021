@@ -7,21 +7,25 @@ extends KinematicBody2D
 const MOVE_SPEED := 400
 var dir := Vector2.ZERO
 
+onready var gun_visu := $GunVisu
+
 const CAPTURE_RANGE = 150
 var capture_curr_range = 0
 const CAPTURE_GROW_SPEED = 100
 
-var fire_timer :=0.0
+var fire_timer := 0.0
 
 var BasicGunClass := load("res://scripts/gun/Basic.gd")
 var ShotgunClass := load("res://scripts/gun/Shotgun.gd")
 var SniperClass := load("res://scripts/gun/Sniper.gd")
+var EnergyGunClass := load("res://scripts/gun/EnergyGun.gd")
 var current_gun : GunBase
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_gun = ShotgunClass.new()
+	current_gun = EnergyGunClass.new()
+	gun_visu.get_node("Sprite").texture = current_gun.image
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -41,7 +45,9 @@ func _process(delta):
 		
 func fire():
 	fire_timer = current_gun.reload_time
-	var position_centered = position + Vector2.UP * 50
+#	var position_centered = position + Vector2.UP * 50
+	var position_centered = gun_visu.get_node("Sprite/bout_du_gun").global_position
+	gun_visu.fire()
 	var bullets = current_gun.generate_bullets(position_centered, position_centered.direction_to(get_global_mouse_position()))
 	for b in bullets:
 		get_node("/root/World1").add_child(b)
