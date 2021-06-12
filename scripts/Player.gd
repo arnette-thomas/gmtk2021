@@ -9,10 +9,6 @@ var dir := Vector2.ZERO
 
 onready var gun_visu := $GunVisu
 
-const CAPTURE_RANGE = 150
-var capture_curr_range = 0
-const CAPTURE_GROW_SPEED = 100
-
 var main_node
 
 var fire_timer := 0.0
