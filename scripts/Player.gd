@@ -5,9 +5,11 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 const MOVE_SPEED := 400
+const MIN_MOVE_SPEED := 200
 var dir := Vector2.ZERO
 
 onready var gun_visu := $GunVisu
+onready var chain := $Chain
 
 var main_node
 
@@ -36,8 +38,9 @@ func _process(delta):
 	if dir.length() > 1:
 		dir = dir.normalized()
 	
-	# Move player
-	move_and_collide(dir * MOVE_SPEED * delta)
+	# Move player, apply malus if chain tension
+	var speed = lerp(MIN_MOVE_SPEED, MOVE_SPEED, 1 - chain.get_tension())
+	move_and_collide(dir * speed * delta)
 	
 	# fire
 	fire_timer -= delta

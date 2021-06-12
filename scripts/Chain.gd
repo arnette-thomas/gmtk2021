@@ -68,6 +68,10 @@ func break_chain():
 	
 	emit_signal("chain_broken")
 
+func get_tension():
+	if hooked_enemy == null: return 0.0
+	return (to_local(hooked_enemy.position) - position).length() / hooked_enemy.max_hook_range
+
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "shoot":
 		line.scale.x = 0
