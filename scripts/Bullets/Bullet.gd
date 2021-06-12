@@ -9,10 +9,12 @@ var speed : float
 var direction : Vector2
 
 onready var particles = $Particles2D
+onready var fireParticles = $FireParticles
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rotation = direction.angle()
+	fireParticles.restart()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

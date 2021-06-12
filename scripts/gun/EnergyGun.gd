@@ -1,14 +1,14 @@
 extends GunBase
 
 	
-const BULLET_SPEEEEEED := 1201
-#const RELOAD_TIME := 0.3
-const SPRAY_ANGLE := deg2rad(15)
-const FIRING_SPEED := 0.2
+const BULLET_SPEEEEEED := 1500
+#const RELOAD_TIME := 0.5
+const SPRAY_ANGLE := deg2rad(2)
+const FIRING_SPEED := 0.8
 
-var image := load("res://sprites/arme_basique.png")
+var image := load("res://sprites/energyGun.png")
 
-var bullet_scene := load("res://scenes/Bullets/Bullet.tscn")
+var bullet_scene := load("res://scenes/Bullets/GrosseBouboule.tscn")
 
 func _init().(BULLET_SPEEEEEED, SPRAY_ANGLE, FIRING_SPEED) -> void:
 	pass

@@ -1,0 +1,149 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scripts/Boss.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/triggerButton.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/CameraShake.gd" type="Script" id=5]
+[ext_resource path="res://scenes/spikes.gd" type="Script" id=6]
+[ext_resource path="res://scenes/bossStage.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 119.373, 118.759 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 31.7187, 32.4605 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 765.343, 31.391 )
+
+[node name="bossStage" type="Node2D"]
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -0.246616 ]
+}
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 0, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+rotation = -0.261799
+offset = Vector2( 0, -50 )
+current = true
+zoom = Vector2( 1.5, 1.5 )
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+offset_v = 1.0
+script = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="YSort/Player/Camera2D"]
+
+[node name="Timer" type="Timer" parent="YSort/Player/Camera2D"]
+
+[node name="Boss" type="KinematicBody2D" parent="YSort"]
+script = ExtResource( 1 )
+target_path = NodePath("../Player")
+
+[node name="Sprite" type="Sprite" parent="YSort/Boss"]
+position = Vector2( 0.0210647, 0.0716791 )
+scale = Vector2( 3.77421, 3.7508 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Boss"]
+shape = SubResource( 1 )
+
+[node name="triggerButton" type="Node2D" parent="YSort"]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="YSort/triggerButton"]
+position = Vector2( 669.566, -0.82412 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="YSort/triggerButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/triggerButton/Area2D"]
+position = Vector2( 670.712, -0.258339 )
+shape = SubResource( 2 )
+
+[node name="spikes" type="Node2D" parent="YSort"]
+position = Vector2( 264.458, 0 )
+script = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="YSort/spikes"]
+position = Vector2( -260.72, -399.659 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="YSort/spikes"]
+position = Vector2( -599.36, -343.681 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/spikes/Area2D"]
+position = Vector2( 336.957, -56.8269 )
+shape = SubResource( 2 )
+
+[node name="Wall" type="StaticBody2D" parent="." groups=[
+"walls",
+]]
+position = Vector2( 0, 300 )
+
+[node name="Sprite" type="Sprite" parent="Wall"]
+position = Vector2( 0.906647, 65.3752 )
+scale = Vector2( 23.9712, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2( 0.509827, 68.55 )
+shape = SubResource( 3 )
+
+[node name="Wall2" type="StaticBody2D" parent="." groups=[
+"walls",
+]]
+position = Vector2( 0, 300 )
+
+[node name="Sprite" type="Sprite" parent="Wall2"]
+position = Vector2( 9.38232, -769.482 )
+scale = Vector2( 23.9712, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2( 8.98553, -766.307 )
+shape = SubResource( 3 )
+
+[node name="Wall3" type="StaticBody2D" parent="." groups=[
+"walls",
+]]
+position = Vector2( 0, 600 )
+
+[node name="Sprite" type="Sprite" parent="Wall3"]
+position = Vector2( 733.934, -787.698 )
+rotation = 1.5708
+scale = Vector2( 18.26, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+position = Vector2( 737.312, -602.71 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="Wall4" type="StaticBody2D" parent="." groups=[
+"walls",
+]]
+position = Vector2( 0, 600 )
+
+[node name="Sprite" type="Sprite" parent="Wall4"]
+position = Vector2( -736, -794.048 )
+rotation = 1.5708
+scale = Vector2( 18.26, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
+position = Vector2( -732.621, -609.059 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[connection signal="timeout" from="YSort/Player/Camera2D/Timer" to="YSort/Player/Camera2D" method="_on_Timer_timeout"]
+[connection signal="body_entered" from="YSort/triggerButton/Area2D" to="YSort/triggerButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="YSort/spikes/Area2D" to="YSort/spikes" method="_on_Area2D_body_entered"]

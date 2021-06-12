@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Chain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/ghost.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=3]
+[ext_resource path="res://scenes/GunVisu.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 32.0107
@@ -24,3 +25,5 @@ shape = SubResource( 1 )
 [node name="Chain" parent="." instance=ExtResource( 1 )]
 
 [connection signal="enemy_hooked" from="Chain" to="." method="_on_Chain_enemy_hooked"]
+[node name="GunVisu" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, -50 )

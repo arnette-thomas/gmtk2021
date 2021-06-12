@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fonts/RetroGamingBig.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/RetroGamingMedium.tres" type="DynamicFont" id=2]
+
+[node name="MainMenu" type="MarginContainer"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 227.0
+margin_top = 175.0
+margin_right = 796.0
+margin_bottom = 424.0
+custom_constants/separation = 60
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 569.0
+margin_bottom = 77.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 1 )
+text = "AWESOME TITLE"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 137.0
+margin_right = 569.0
+margin_bottom = 249.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer"]
+margin_left = 193.0
+margin_right = 375.0
+margin_bottom = 112.0
+size_flags_vertical = 3
+custom_constants/separation = 10
+
+[node name="ContinueContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 182.0
+margin_bottom = 51.0
+custom_constants/separation = 20
+
+[node name="ContinueSelection" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/ContinueContainer"]
+margin_right = 24.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 24, 51 )
+custom_fonts/font = ExtResource( 2 )
+text = ">"
+
+[node name="ContinueLabel" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/ContinueContainer"]
+margin_left = 44.0
+margin_right = 182.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 2 )
+text = "Start"
+
+[node name="ExitContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 61.0
+margin_right = 182.0
+margin_bottom = 112.0
+custom_constants/separation = 20
+
+[node name="ExitSelection" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/ExitContainer"]
+margin_right = 24.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 24, 51 )
+custom_fonts/font = ExtResource( 2 )
+text = ">"
+
+[node name="ExitLabel" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/ExitContainer"]
+margin_left = 44.0
+margin_right = 143.0
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 2 )
+text = "Exit"
