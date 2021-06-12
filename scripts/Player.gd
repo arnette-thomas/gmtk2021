@@ -26,3 +26,6 @@ func _process(delta):
 	
 	# Move player
 	move_and_collide(dir * MOVE_SPEED * delta)
+	
+#	if Input.is_action_just_pressed("ui_accept"):
+#		Globals.camera.shake(100, 0.2, 400)
