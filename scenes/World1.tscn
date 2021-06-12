@@ -1,9 +1,29 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [node name="World1" type="Node2D"]
 
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 0, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+offset = Vector2( 0, -50 )
+current = true
+zoom = Vector2( 1.5, 1.5 )
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+offset_v = 1.0
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 354.031, 249.64 )
+texture = ExtResource( 2 )
+
+[node name="icon2" type="Sprite" parent="."]
+position = Vector2( 337.213, 74.7332 )
+texture = ExtResource( 2 )
