@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scripts/CameraShake.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Zombie.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Minecraft.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 541.003, 31.4458 )
@@ -34,6 +35,9 @@ script = ExtResource( 3 )
 [node name="Zombie" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 172, 304 )
 target_path = NodePath("../Player")
+
+[node name="Minecraft" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( -347.607, 224.746 )
 
 [node name="Wall" type="StaticBody2D" parent="." groups=[
 "walls",
