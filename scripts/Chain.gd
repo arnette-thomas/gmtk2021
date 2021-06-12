@@ -10,6 +10,7 @@ onready var animation = $AnimationPlayer
 onready var particles = $Particles2D
 
 signal enemy_hooked(body)
+signal chain_broken()
 
 var is_shooting = false
 var hooked_enemy : Enemy = null
@@ -62,6 +63,8 @@ func break_chain():
 	coll.scale.x = 0
 	line.points[1] = default_line_end
 	line.width = default_line_width
+	
+	emit_signal("chain_broken")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "shoot":
@@ -80,6 +83,14 @@ func _on_Chain_body_entered(body: PhysicsBody2D):
 		rotation = 0
 		emit_signal("enemy_hooked", body as Enemy)
 		is_shooting = false
+		
+		# Attract enemy if not enough range
+		var diff = position - to_local(body.position)
+		while diff.length() > (body.max_hook_range * 0.75):
+			body.move_and_collide(diff.normalized() * 500 * get_process_delta_time())
+			yield(get_tree(), "idle_frame")
+			diff = position - to_local(body.position)
+		
 	elif body.is_in_group("walls"):
 		spawn_destroy_particles()
 		animation.stop()
