@@ -17,6 +17,8 @@ var hooked_enemy : Enemy = null
 onready var default_line_end = line.points[1]
 onready var default_line_width = line.width
 
+var pulling = false
+
 const MIN_WIDTH = 4
 const MAX_WIDTH = 20
 
@@ -38,7 +40,7 @@ func _process(delta):
 		line.width = lerp(MAX_WIDTH, MIN_WIDTH, (to_local(hooked_enemy.position) - position).length() / hooked_enemy.max_hook_range)
 		
 		# Chain break !
-		if line_length > hooked_enemy.max_hook_range:
+		if line_length > hooked_enemy.max_hook_range && !pulling:
 			break_chain()
 		return
 		
@@ -87,9 +89,11 @@ func _on_Chain_body_entered(body: PhysicsBody2D):
 		# Attract enemy if not enough range
 		var diff = position - to_local(body.position)
 		while diff.length() > (body.max_hook_range * 0.75):
+			pulling = true
 			body.move_and_collide(diff.normalized() * 500 * get_process_delta_time())
 			yield(get_tree(), "idle_frame")
 			diff = position - to_local(body.position)
+		pulling = false
 		
 	elif body.is_in_group("walls"):
 		spawn_destroy_particles()
