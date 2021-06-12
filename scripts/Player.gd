@@ -26,7 +26,7 @@ var current_gun : GunBase
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_gun = EnergyGunClass.new()
+	current_gun = SniperClass.new()
 	gun_visu.get_node("Sprite").texture = current_gun.image
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -50,7 +50,7 @@ func fire():
 #	var position_centered = position + Vector2.UP * 50
 	var position_centered = gun_visu.get_node("Sprite/bout_du_gun").global_position
 	gun_visu.fire()
-	var bullets = current_gun.generate_bullets(position_centered, position_centered.direction_to(get_global_mouse_position()))
+	var bullets = current_gun.generate_bullets(position_centered, gun_visu.gun_position.normalized())
 	for b in bullets:
 		main_node.add_child(b)
 	

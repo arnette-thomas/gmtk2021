@@ -29,7 +29,7 @@ func _process(delta):
 
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("walls"):
+	if body.is_in_group("walls") or body.is_in_group("terrain"):
 		particles_continue.one_shot = true
 		particles_continue.visible = false
 		particles.restart()

@@ -15,6 +15,7 @@ func _init().(BULLET_SPEEEEEED, SPRAY_ANGLE, FIRING_SPEED) -> void:
 	
 	
 func generate_bullets(position : Vector2, direction : Vector2) -> Array:
+	Globals.camera.shake(700, 0.1, 700)
 	var bullet_instance = bullet_scene.instance()
 	bullet_instance.speed = BULLET_SPEEEEEED
 	bullet_instance.direction = direction.rotated(rand_range(-SPRAY_ANGLE/2, SPRAY_ANGLE/2))

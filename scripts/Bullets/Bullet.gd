@@ -29,7 +29,7 @@ func _process(delta):
 
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("walls"):
+	if body.is_in_group("walls") or body.is_in_group("terrain"):
 		particles.restart()
 		$Sprite.visible = false
 		speed = 0

@@ -5,7 +5,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 170.954, 108.143 )
 
-[node name="Rock" type="StaticBody2D"]
+[node name="Rock" type="StaticBody2D" groups=[
+"terrain",
+]]
 
 [node name="rock_tall" type="Sprite" parent="."]
 position = Vector2( -5.46942, -197.75 )
