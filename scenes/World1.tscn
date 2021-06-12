@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scripts/CameraShake.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Zombie.tscn" type="PackedScene" id=4]
 
 [node name="World1" type="Node2D"]
 
@@ -25,6 +26,10 @@ script = ExtResource( 3 )
 [node name="Tween" type="Tween" parent="YSort/Player/Camera2D"]
 
 [node name="Timer" type="Timer" parent="YSort/Player/Camera2D"]
+
+[node name="Zombie" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 172, 304 )
+target_path = NodePath("../Player")
 
 [node name="icon" type="Sprite" parent="."]
 position = Vector2( 354.031, 249.64 )
