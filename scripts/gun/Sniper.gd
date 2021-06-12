@@ -6,7 +6,9 @@ const BULLET_SPEEEEEED := 4000
 const SPRAY_ANGLE := deg2rad(2)
 const FIRING_SPEED := 0.8
 
-var bullet_scene := load("res://scenes/Bullet.tscn")
+var bullet_scene := load("res://scenes/Bullets/Bullet.tscn")
+
+var image := load("res://sprites/sniper.png")
 
 func _init().(BULLET_SPEEEEEED, SPRAY_ANGLE, FIRING_SPEED) -> void:
 	pass
