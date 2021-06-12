@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/Zombie.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 538.993, 31.4458 )
+extents = Vector2( 541.003, 31.4458 )
 
 [node name="World1" type="Node2D"]
 

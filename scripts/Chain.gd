@@ -17,7 +17,7 @@ onready var default_line_end = line.points[1]
 onready var default_line_width = line.width
 
 const MIN_WIDTH = 4
-const MAX_WIDTH = 15
+const MAX_WIDTH = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,6 +27,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	coll.disabled = !is_shooting
+	
 	# If there is an enemy hooked 
 	if hooked_enemy != null:
 		line.points[1] = line.to_local(hooked_enemy.position)
@@ -47,16 +49,13 @@ func _process(delta):
 		is_shooting = true
 
 func break_chain():
-	var coroutine = FreezeFrame.freeze(0.1)
+	var coroutine = FreezeFrame.freeze(0.12)
 	yield(coroutine, "completed")
 	
+	Globals.camera.shake(300, 0.1, 300)
+	
 	# particles
-	var line_vector = line.points[1] - line.points[0]
-	var line_length = line_vector.length()
-	particles.emission_rect_extents.x = line_length / 2.0
-	particles.position = line_vector / 2.0
-	particles.rotation = Vector2.RIGHT.angle_to(line_vector)
-	particles.restart()
+	spawn_destroy_particles()
 	
 	hooked_enemy = null
 	line.scale.x = 0
@@ -81,3 +80,21 @@ func _on_Chain_body_entered(body: PhysicsBody2D):
 		rotation = 0
 		emit_signal("enemy_hooked", body as Enemy)
 		is_shooting = false
+	elif body.is_in_group("walls"):
+		spawn_destroy_particles()
+		animation.stop()
+		line.scale.x = 0
+		coll.scale.x = 0
+		rotation = 0
+		is_shooting = false
+
+func spawn_destroy_particles():
+	var line_vector = line.points[1] - line.points[0]
+	line_vector.x *= line.scale.x
+	line_vector.y *= line.scale.y
+	line_vector = line_vector.rotated(rotation)
+	var line_length = line_vector.length()
+	particles.emission_rect_extents.x = line_length / 2.0
+	particles.position = line_vector / 2.0
+	particles.rotation = Vector2.RIGHT.angle_to(line_vector)
+	particles.restart()

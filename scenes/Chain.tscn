@@ -6,7 +6,7 @@
 colors = PoolColorArray( 1, 1, 1, 1, 0.0705882, 0.917647, 0.917647, 1 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 200.404, 5.62543 )
+extents = Vector2( 200, 5 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "shoot"
@@ -35,6 +35,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 1e-05, 1 ), Vector2( 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 200, 0 ) ]
+}
 
 [node name="Chain" type="Area2D"]
 position = Vector2( 0, -50 )
@@ -47,7 +59,6 @@ default_color = Color( 0.0313726, 0.85098, 0.960784, 1 )
 gradient = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 200, 0 )
 scale = Vector2( 1e-05, 1 )
 shape = SubResource( 2 )
 
@@ -62,6 +73,7 @@ one_shot = true
 explosiveness = 1.0
 randomness = 0.22
 lifetime_randomness = 0.69
+local_coords = false
 emission_shape = 2
 emission_rect_extents = Vector2( 100, 1 )
 spread = 180.0
