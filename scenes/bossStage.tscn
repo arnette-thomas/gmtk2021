@@ -1,15 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Boss.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/triggerButton.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/CameraShake.gd" type="Script" id=5]
+[ext_resource path="res://scenes/spikes.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 119.373, 118.759 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 31.7187, 32.4605 )
+
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 765.343, 31.4458 )
+extents = Vector2( 765.343, 31.391 )
 
 [node name="bossStage" type="Node2D"]
 __meta__ = {
@@ -48,6 +53,34 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Boss"]
 shape = SubResource( 1 )
+
+[node name="triggerButton" type="Node2D" parent="YSort"]
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="YSort/triggerButton"]
+position = Vector2( 669.566, -0.82412 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="YSort/triggerButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/triggerButton/Area2D"]
+position = Vector2( 670.712, -0.258339 )
+shape = SubResource( 3 )
+
+[node name="spikes" type="Node2D" parent="YSort"]
+position = Vector2( 264.458, 0 )
+script = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="YSort/spikes"]
+position = Vector2( -260.72, -399.659 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="YSort/spikes"]
+position = Vector2( -599.36, -343.681 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/spikes/Area2D"]
+position = Vector2( 336.957, -56.8269 )
+shape = SubResource( 3 )
 
 [node name="Wall" type="StaticBody2D" parent="." groups=[
 "walls",
@@ -110,3 +143,5 @@ rotation = 1.5708
 shape = SubResource( 2 )
 
 [connection signal="timeout" from="YSort/Player/Camera2D/Timer" to="YSort/Player/Camera2D" method="_on_Timer_timeout"]
+[connection signal="body_entered" from="YSort/triggerButton/Area2D" to="YSort/triggerButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="YSort/spikes/Area2D" to="YSort/spikes" method="_on_Area2D_body_entered"]

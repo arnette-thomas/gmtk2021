@@ -66,5 +66,7 @@ func bossWaiting():
 func bossDashing(delta):
 	move_and_collide(dashDirection * dashSpeed * delta)
 	pass
-	
 
+func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
+	print('Boss on button')
+	pass # Replace with function body.
