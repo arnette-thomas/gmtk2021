@@ -4,6 +4,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scripts/CameraShake.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Zombie.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Terrain/Map1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sprites/terrain.jpg" type="Texture" id=6]
 
@@ -53,4 +54,10 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
 shape = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 5 )]
+visible = false
+
 [connection signal="timeout" from="YSort/Player/Camera2D/Timer" to="YSort/Player/Camera2D" method="_on_Timer_timeout"]
