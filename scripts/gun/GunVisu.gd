@@ -8,6 +8,8 @@ const RADIUS := 70
 onready var boisson_au_citron := $Sprite
 var gun_position
 
+var target_position # vecteur normalisé de l'origin vers le target
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -15,7 +17,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	gun_position = get_local_mouse_position().normalized() * RADIUS
+	gun_position = target_position * RADIUS
 	boisson_au_citron.position = gun_position
 	boisson_au_citron.rotation = gun_position.angle()
 	if gun_position.angle() > PI/2 || gun_position.angle() < - PI/2:
