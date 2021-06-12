@@ -4,7 +4,7 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-const MOVE_SPEED := 300
+const MOVE_SPEED := 400
 var dir := Vector2.ZERO
 
 const CAPTURE_RANGE = 150
@@ -21,7 +21,8 @@ func _process(delta):
 	# Handle inputs
 	dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	dir.y = Input.get_action_strength("down") - Input.get_action_strength("up")
-	dir = dir.normalized()
+	if dir.length() > 1:
+		dir = dir.normalized()
 	
 	# Move player
 	move_and_collide(dir * MOVE_SPEED * delta)
