@@ -24,8 +24,9 @@ shape = SubResource( 1 )
 
 [node name="Chain" parent="." instance=ExtResource( 1 )]
 
+<<<<<<< HEAD
+[connection signal="enemy_hooked" from="Chain" to="." method="_on_Chain_enemy_hooked"]
+=======
 [node name="GunVisu" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, -50 )
-
-[connection signal="chain_broken" from="Chain" to="." method="_on_Chain_chain_broken"]
-[connection signal="enemy_hooked" from="Chain" to="." method="_on_Chain_enemy_hooked"]
+>>>>>>> main
