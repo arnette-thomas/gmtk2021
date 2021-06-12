@@ -6,7 +6,9 @@
 radius = 93.4843
 height = 141.694
 
-[node name="Sapin" type="StaticBody2D"]
+[node name="Sapin" type="StaticBody2D" groups=[
+"terrain",
+]]
 scale = Vector2( 0.6, 0.6 )
 
 [node name="sapin" type="Sprite" parent="."]

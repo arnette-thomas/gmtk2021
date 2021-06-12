@@ -5,7 +5,9 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 135.274
 
-[node name="RockLittle" type="StaticBody2D"]
+[node name="RockLittle" type="StaticBody2D" groups=[
+"terrain",
+]]
 
 [node name="rock_little" type="Sprite" parent="."]
 position = Vector2( 9.21594, -132.938 )
