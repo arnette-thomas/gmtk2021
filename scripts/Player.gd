@@ -21,12 +21,15 @@ var BasicGunClass := load("res://scripts/gun/Basic.gd")
 var ShotgunClass := load("res://scripts/gun/Shotgun.gd")
 var SniperClass := load("res://scripts/gun/Sniper.gd")
 var EnergyGunClass := load("res://scripts/gun/EnergyGun.gd")
+var guns := [BasicGunClass, ShotgunClass, SniperClass, EnergyGunClass]
+
+var current_gun_index := 0
 var current_gun : GunBase
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_gun = SniperClass.new()
+	current_gun = guns[current_gun_index].new()
 	gun_visu.get_node("Sprite").texture = current_gun.image
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,6 +47,16 @@ func _process(delta):
 	fire_timer -= delta
 	if Input.is_action_pressed("fire_bullet") and fire_timer < 0:
 		fire()
+		
+	# change gun
+	if Input.is_action_just_pressed("ui_focus_next"):
+		current_gun_index += 1
+		if current_gun_index == guns.size():
+			current_gun_index = 0
+		current_gun = guns[current_gun_index].new()
+		gun_visu.get_node("Sprite").texture = current_gun.image
+		
+
 		
 func fire():
 	fire_timer = current_gun.reload_time
