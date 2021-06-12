@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://sprites/champis.png" type="Texture" id=1]
+
+[node name="Champignon" type="Node2D"]
+
+[node name="champis" type="Sprite" parent="."]
+position = Vector2( 0.287842, -71.7202 )
+scale = Vector2( 0.519017, 0.519017 )
+texture = ExtResource( 1 )
