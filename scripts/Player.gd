@@ -14,12 +14,14 @@ const CAPTURE_GROW_SPEED = 100
 var fire_timer :=0.0
 
 var BasicGunClass := load("res://scripts/gun/Basic.gd")
+var ShotgunClass := load("res://scripts/gun/Shotgun.gd")
+var SniperClass := load("res://scripts/gun/Sniper.gd")
 var current_gun : GunBase
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_gun = BasicGunClass.new()
+	current_gun = ShotgunClass.new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

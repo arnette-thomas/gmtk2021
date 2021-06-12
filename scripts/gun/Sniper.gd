@@ -1,10 +1,10 @@
 extends GunBase
 
 	
-const BULLET_SPEEEEEED := 1201
-#const RELOAD_TIME := 0.3
-const SPRAY_ANGLE := deg2rad(15)
-const FIRING_SPEED := 0.2
+const BULLET_SPEEEEEED := 4000
+#const RELOAD_TIME := 0.5
+const SPRAY_ANGLE := deg2rad(2)
+const FIRING_SPEED := 0.8
 
 var bullet_scene := load("res://scenes/Bullet.tscn")
 
