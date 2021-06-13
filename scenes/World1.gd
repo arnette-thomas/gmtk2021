@@ -133,4 +133,5 @@ func _on_Timer_timeout():
 				enemies_alive_array.append(enemy_instance)
 				add_child(enemy_instance)
 			current_wave += 1
+
 		
