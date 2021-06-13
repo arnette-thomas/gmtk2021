@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/Boss.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -7,9 +7,98 @@
 [ext_resource path="res://scripts/CameraShake.gd" type="Script" id=5]
 [ext_resource path="res://scenes/spikes.gd" type="Script" id=6]
 [ext_resource path="res://scenes/bossStage.gd" type="Script" id=7]
+[ext_resource path="res://sprites/boss_spritesheet.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 119.373, 118.759 )
+extents = Vector2( 104.069, 74.9515 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "dash"
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 4 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "run"
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "dash"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "idle"
+
+[sub_resource type="AnimationNodeTransition" id=9]
+input_count = 2
+input_0/name = "idle"
+input_0/auto_advance = false
+input_1/name = "moving"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeTransition" id=10]
+input_count = 2
+input_0/name = "run"
+input_0/auto_advance = false
+input_1/name = "dash"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "run"
+
+[sub_resource type="AnimationNodeBlendTree" id=12]
+graph_offset = Vector2( -664.831, 63.5 )
+nodes/dashing/node = SubResource( 7 )
+nodes/dashing/position = Vector2( -340, 420 )
+nodes/idle/node = SubResource( 8 )
+nodes/idle/position = Vector2( -340, 80 )
+nodes/idle_state/node = SubResource( 9 )
+nodes/idle_state/position = Vector2( 100, 140 )
+nodes/move_state/node = SubResource( 10 )
+nodes/move_state/position = Vector2( -100, 320 )
+nodes/running/node = SubResource( 11 )
+nodes/running/position = Vector2( -340, 260 )
+node_connections = [ "output", 0, "idle_state", "move_state", 0, "running", "move_state", 1, "dashing", "idle_state", 0, "idle", "idle_state", 1, "move_state" ]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 31.7187, 32.4605 )
@@ -26,7 +115,6 @@ __meta__ = {
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 0, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="YSort/Player"]
 rotation = -0.261799
@@ -50,11 +138,27 @@ target_path = NodePath("../Player")
 
 [node name="Sprite" type="Sprite" parent="YSort/Boss"]
 position = Vector2( 0.0210647, 0.0716791 )
-scale = Vector2( 3.77421, 3.7508 )
-texture = ExtResource( 2 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 8 )
+hframes = 3
+vframes = 2
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Boss"]
+position = Vector2( 0, 19.199 )
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/Boss"]
+anims/dash = SubResource( 6 )
+anims/idle = SubResource( 4 )
+anims/run = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="YSort/Boss"]
+tree_root = SubResource( 12 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/idle_state/current = 0
+parameters/move_state/current = 0
 
 [node name="triggerButton" type="Node2D" parent="YSort"]
 script = ExtResource( 3 )

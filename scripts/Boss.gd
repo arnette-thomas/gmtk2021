@@ -14,6 +14,9 @@ var moveSpeed
 var dashDirection
 var dashSpeed
 
+onready var anim_tree : AnimationTree = $AnimationTree
+onready var sprite : Sprite = $Sprite
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	position = get_viewport_rect().size / 2
@@ -29,7 +32,6 @@ func _process(delta):
 	deltaCounter += delta
 	if target == null: return
 	
-	
 	match behaviourStage:
 		0:
 			bossMoveTowardPlayer(delta)
@@ -39,6 +41,8 @@ func _process(delta):
 				dashDirection = position.direction_to(get_node("../Player").position).normalized()
 		1:
 			bossWaiting()
+			anim_tree.set("parameters/move_state/current", 1)
+			anim_tree.set("parameters/idle_state/current", 1)
 			if (deltaCounter > 1) :
 				deltaCounter -= 1
 				behaviourStage = 2
@@ -57,13 +61,17 @@ func _process(delta):
 	
 func bossMoveTowardPlayer(delta):
 	var dir = position.direction_to(target.position).normalized()
+	sprite.flip_h = dir.x > 0
 	move_and_collide(dir * moveSpeed * delta)
+	anim_tree.set("parameters/move_state/current", 0)
+	anim_tree.set("parameters/idle_state/current", 1)
 	pass
 	
 func bossWaiting():
-	pass
+	anim_tree.set("parameters/idle_state/current", 0)
 	
 func bossDashing(delta):
+	sprite.flip_h = dashDirection.x > 0
 	move_and_collide(dashDirection * dashSpeed * delta)
 	pass
 
