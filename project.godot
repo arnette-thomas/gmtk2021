@@ -53,6 +53,11 @@ _global_script_classes=[ {
 "class": "rafale",
 "language": "GDScript",
 "path": "res://scenes/Rafale.gd"
+}, {
+"base": "Zombie",
+"class": "shotgun",
+"language": "GDScript",
+"path": "res://scenes/Shotgun.gd"
 } ]
 _global_script_class_icons={
 "Boss": "",
@@ -63,7 +68,8 @@ _global_script_class_icons={
 "Zombie": "",
 "basic_zombie": "",
 "boulet_unique": "",
-"rafale": ""
+"rafale": "",
+"shotgun": ""
 }
 
 [application]
