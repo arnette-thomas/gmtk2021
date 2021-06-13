@@ -19,7 +19,7 @@ class Wave:
 		num_z_shotgun = nzsh
 
 var waves = [
-	Wave.new(5,1,0,0,0),
+	Wave.new(0,1,0,1,0),
 #	Wave.new(0,1,0,0,0),
 ]
 
