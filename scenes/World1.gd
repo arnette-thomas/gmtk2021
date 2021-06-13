@@ -3,6 +3,8 @@ extends Node2D
 var enemies_alive_array = []
 var enemies_list = []
 
+var spawn_radius := 600
+
 # the position are absolute to the terrain
 class Wave:
 	var num_vaches: int
@@ -113,7 +115,7 @@ func get_random_position_outside_of_player_view():
 	var rand_pos = Vector2(randi()%(x_max - x_min) + x_min,randi()%(y_max - y_min) + y_min)
 	
 	# Pour éviter que le point spawn dans la vision du joueur
-	while (get_viewport_rect().has_point(rand_pos)):
+	while (player_node.position.distance_to(rand_pos) < spawn_radius):
 		rand_pos = Vector2(randi()%(x_max - x_min) + x_min,randi()%(y_max - y_min) + y_min)
 	
 	return rand_pos
