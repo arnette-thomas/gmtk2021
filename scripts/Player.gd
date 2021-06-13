@@ -83,7 +83,7 @@ func fire():
 #		var position_centered = position + Vector2.UP * 50
 		var position_centered = gun_visu.get_node("Sprite/bout_du_gun").global_position
 		gun_visu.fire()
-		var bullets = current_gun.generate_bullets(position_centered, position_centered.direction_to(get_global_mouse_position()))
+		var bullets = current_gun.generate_bullets(position_centered, gun_visu.gun_position.normalized())
 		for b in bullets:
 			main_node.add_child(b)
 	
