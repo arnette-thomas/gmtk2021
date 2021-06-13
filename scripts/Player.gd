@@ -38,6 +38,7 @@ func _ready():
 	current_gun = guns[current_gun_index].new()
 	gun_visu.get_node("Sprite").texture = current_gun.image
 	current_gun.friendly = FRIENDLY
+	gun_visu.gun = current_gun
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -109,6 +110,7 @@ func change_weapon():
 	current_gun = guns[current_gun_index].new()
 	current_gun.friendly = FRIENDLY		
 	gun_visu.get_node("Sprite").texture = current_gun.image
+	gun_visu.gun = current_gun
 
 func _on_Chain_enemy_hooked(body):
 	if body is Minecraft:

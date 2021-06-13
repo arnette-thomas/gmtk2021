@@ -11,8 +11,9 @@ var image := load("res://sprites/energyGun.png")
 var image_evil := load("res://sprites/energyGun_evil.png")
 
 var bullet_scene := load("res://scenes/Bullets/GrosseBouboule.tscn")
+var sfx_ = load("res://sfx/sniper_shoot.wav")
 
-func _init().(BULLET_SPEEEEEED, SPRAY_ANGLE, FIRING_SPEED, DAMAGE) -> void:
+func _init().(BULLET_SPEEEEEED, SPRAY_ANGLE, FIRING_SPEED, DAMAGE, sfx_) -> void:
 	pass
 	
 	

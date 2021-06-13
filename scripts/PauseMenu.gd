@@ -1,8 +1,8 @@
 extends Menu
 
 onready var options_text = $CenterContainer/VBoxContainer/VBoxContainer/OptionsContainer/OptionsLabel as Label
-const MUTE_TEXT = "Mute"
-const UNMUTE_TEXT = "Unmute"
+const MUTE_TEXT = "Mute Music"
+const UNMUTE_TEXT = "Unmute Music"
 
 var muted = false
 

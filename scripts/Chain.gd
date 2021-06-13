@@ -54,6 +54,7 @@ func _process(delta):
 			var shooting_dir = aim_dir if aim_dir != Vector2.ZERO else get_local_mouse_position().normalized()
 			rotation = Vector2.RIGHT.angle_to(shooting_dir)
 			animation.play("shoot")
+			AudioManager.SFX.play("ChainShoot")
 			is_shooting = true
 
 func break_chain():
@@ -74,6 +75,7 @@ func break_chain():
 	spawn_destroy_particles()
 	
 	emit_signal("chain_broken")
+	AudioManager.SFX.play("ChainBroken")
 
 func get_tension():
 	if hooked_enemy == null: 
@@ -97,6 +99,7 @@ func _on_Chain_body_entered(body: PhysicsBody2D):
 		coll.scale.x = 1
 		rotation = 0
 		emit_signal("enemy_hooked", body as Enemy)
+		AudioManager.SFX.play("ChainHit")
 		is_shooting = false
 		
 		# Attract enemy if not enough range
