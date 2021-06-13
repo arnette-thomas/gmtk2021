@@ -12,6 +12,7 @@ var main_node
 
 
 func _ready():
+	hp = MAX_HP
 	if current_gun == null:
 		current_gun = BasicGunClass.new()
 	
@@ -24,11 +25,19 @@ func _process(delta):
 	var dir = position.direction_to(target.position).normalized()
 	move_and_collide(dir * move_speed * delta)
 
+
 func fire():
 	fire_timer = current_gun.reload_time
-#	var position_centered = position + Vector2.UP * 50
 	var position_centered = gun_visu.get_node("Sprite/bout_du_gun").global_position
 	gun_visu.fire()
 	var bullets = current_gun.generate_bullets(position_centered, position_centered.direction_to(target.position))
 	for b in bullets:
 		main_node.add_child(b)
+
+
+func remove_hp(amnt):
+	.remove_hp(amnt)
+	# Update Hp bar
+	$HP_bar.show()
+	$HP_bg.show()
+	$HP_bar.rect_size.x = (hp as float / MAX_HP) * $HP_bg.rect_size.x

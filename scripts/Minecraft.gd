@@ -7,6 +7,12 @@ var posrand=Vector2.ZERO
 var dir=Vector2.ZERO
 var timebfdash=5
 
+
+func _ready() -> void:
+	MAX_HP = 1.0
+	hp = MAX_HP
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	dir = position.direction_to(posrand).normalized()
@@ -21,7 +27,8 @@ func get_random_position():
 	var xrand=randi()%int(x_max)
 	var yrand=randi()%int(y_max)
 	return Vector2(xrand,yrand)
-	
+
+
 func dash(initdir):
 	var totaltime = 0
 	while totaltime < 0.8:

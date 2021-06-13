@@ -7,7 +7,9 @@
 radius = 30.2699
 height = 4.61621
 
-[node name="Minecraft" type="KinematicBody2D"]
+[node name="Minecraft" type="KinematicBody2D" groups=[
+"enemies",
+]]
 script = ExtResource( 2 )
 max_hook_range = 300
 
@@ -23,6 +25,5 @@ shape = SubResource( 1 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
-
 [connection signal="ready" from="Timer" to="." method="_on_Timer_ready"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
