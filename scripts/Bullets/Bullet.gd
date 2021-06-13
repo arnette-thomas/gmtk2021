@@ -88,8 +88,8 @@ func do_the_particle_thingy_then_kill():
 	can_hit = false
 	
 	# Play explosion
-	particles.restart()
-	$Sprite.visible = false
-	speed = 0
-	yield(get_tree().create_timer(particles.lifetime), "timeout")
+#	particles.restart()
+#	$Sprite.visible = false
+#	speed = 0
+#	yield(get_tree().create_timer(particles.lifetime), "timeout")
 	queue_free()

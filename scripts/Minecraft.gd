@@ -59,30 +59,31 @@ func get_random_position():
 
 
 func dash(initdir):
-	dashing=true
-	anim_tree.set("parameters/move_state/current", 1)
-	var totaltime = 0
-	var direction = initdir
-	var collision = false
-	var acceleration = 1
-	while dashing:
-		var delta = get_process_delta_time()
-		var currentcollision = move_and_collide(direction * acceleration)
-		if currentcollision==null:
-			pass
-		else:
-			direction=currentcollision.normal
-			totaltime=0
-			collision = true
-		if !collision:
-			acceleration = (1+totaltime*totaltime) * move_speed * 3 * delta
-		else:
-			acceleration = acceleration/1.2
-		totaltime+=delta
-		if (totaltime>=0.8) || (collision&&totaltime>=0.2):
-			dashing=false
-		yield(get_tree(), "idle_frame")
-	anim_tree.set("parameters/move_state/current", 0)
+#	dashing=true
+#	anim_tree.set("parameters/move_state/current", 1)
+#	var totaltime = 0
+#	var direction = initdir
+#	var collision = false
+#	var acceleration = 1
+#	while dashing:
+#		var delta = get_process_delta_time()
+#		var currentcollision = move_and_collide(direction * acceleration)
+#		if currentcollision==null:
+#			pass
+#		else:
+#			direction=currentcollision.normal
+#			totaltime=0
+#			collision = true
+#		if !collision:
+#			acceleration = (1+totaltime*totaltime) * move_speed * 3 * delta
+#		else:
+#			acceleration = acceleration/1.2
+#		totaltime+=delta
+#		if (totaltime>=0.8) || (collision&&totaltime>=0.2):
+#			dashing=false
+#		yield(get_tree(), "idle_frame")
+#	anim_tree.set("parameters/move_state/current", 0)
+	pass
 
 func _on_Timer_timeout():
 	posrand=get_random_position()
