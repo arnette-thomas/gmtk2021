@@ -20,7 +20,7 @@ class Wave:
 
 var waves = [
 	Wave.new(5,1,0,0,0),
-#	Wave.new(0,1,0,0,0),
+	Wave.new(0,1,0,0,0),
 ]
 
 var current_wave = 0
@@ -130,7 +130,8 @@ func _on_Timer_timeout():
 		else:
 			for ennemy_name in enemies_list[current_wave] :
 				var enemy_instance = return_according_instance(ennemy_name, 'random')
-				enemies_alive_array.append(enemy_instance)
+				if (ennemy_name != 'minecraft') :
+					enemies_alive_array.append(enemy_instance)
 				add_child(enemy_instance)
 			current_wave += 1
 

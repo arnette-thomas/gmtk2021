@@ -100,7 +100,7 @@ nodes/move_state/node = SubResource( 8 )
 nodes/move_state/position = Vector2( -100, 320 )
 nodes/running/node = SubResource( 9 )
 nodes/running/position = Vector2( -340, 260 )
-node_connections = [ "output", 0, "idle_state", "move_state", 0, "running", "move_state", 1, "dashing", "idle_state", 0, "idle", "idle_state", 1, "move_state" ]
+node_connections = [ "output", 0, "idle_state", "idle_state", 0, "idle", "idle_state", 1, "move_state", "move_state", 0, "running", "move_state", 1, "dashing" ]
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 31.7187, 32.4605 )
