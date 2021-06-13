@@ -82,7 +82,7 @@ func _process(delta):
 
 		
 func fire():
-	if EnemyLinked is Minecraft:
+	if (EnemyLinked is Minecraft)||(EnemyLinked is Boss):
 		chain.break_chain()
 		dash(gun_visu.target_position)
 	elif EnemyLinked==null:
@@ -127,6 +127,8 @@ func _on_Chain_enemy_hooked(body):
 	elif body is Boulet_Unique:
 		EnemyLinked = body
 	elif body is shotgun:
+		EnemyLinked = body
+	elif body is Boss:
 		EnemyLinked = body
 	change_weapon()
 	
