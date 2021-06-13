@@ -4,17 +4,9 @@ class_name Menu
 
 var is_enabled = true
 
-var selectors = [
-	$CenterContainer/VBoxContainer/VBoxContainer/ContinueContainer/ContinueSelection,
-	$CenterContainer/VBoxContainer/VBoxContainer/OptionsContainer/OptionsSelection,
-	$CenterContainer/VBoxContainer/VBoxContainer/ExitContainer/ExitSelection
-]
+var selectors = []
 
-var actions = [
-	funcref(self, "on_continue"),
-	funcref(self, "on_options"),
-	funcref(self, "on_exit")
-]
+var actions = []
 
 const SELECTOR_TEXT = ">"
 var curr_selection = 0

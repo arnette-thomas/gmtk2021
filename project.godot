@@ -40,21 +40,6 @@ _global_script_classes=[ {
 "path": "res://scripts/Zombie.gd"
 }, {
 "base": "Zombie",
-"class": "basic_zombie",
-"language": "GDScript",
-"path": "res://scenes/BasicZombie.gd"
-}, {
-"base": "Zombie",
-"class": "boulet_unique",
-"language": "GDScript",
-"path": "res://scenes/Boulet_unique.gd"
-}, {
-"base": "Zombie",
-"class": "rafale",
-"language": "GDScript",
-"path": "res://scenes/Rafale.gd"
-}, {
-"base": "Zombie",
 "class": "shotgun",
 "language": "GDScript",
 "path": "res://scenes/Shotgun.gd"
@@ -66,9 +51,6 @@ _global_script_class_icons={
 "Menu": "",
 "Minecraft": "",
 "Zombie": "",
-"basic_zombie": "",
-"boulet_unique": "",
-"rafale": "",
 "shotgun": ""
 }
 
@@ -82,6 +64,7 @@ config/icon="res://icon.png"
 
 Globals="*res://scripts/Globals.gd"
 FreezeFrame="*res://scenes/FreezeFrame.tscn"
+AudioManager="*res://scenes/AudioManager.tscn"
 
 [input]
 
