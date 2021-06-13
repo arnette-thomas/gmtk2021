@@ -42,8 +42,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Handle inputs
-	
-	gun_visu.target_position = get_local_mouse_position().normalized()
+	var aim_dir = Vector2(Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"), Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up"))
+	var shooting_dir = aim_dir if aim_dir != Vector2.ZERO else get_local_mouse_position().normalized()
+	gun_visu.target_position = shooting_dir
 	dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	dir.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	if dir.length() > 1:
@@ -101,7 +102,7 @@ func dash(initdir):
 	var totaltime = 0
 	while totaltime < 0.2:
 		var delta = get_process_delta_time()
-		move_and_collide(get_local_mouse_position().normalized() * MOVE_SPEED * 3 * delta)
+		move_and_collide(gun_visu.target_position * MOVE_SPEED * 3 * delta)
 		totaltime += delta
 		yield(get_tree(), "idle_frame")
 	
