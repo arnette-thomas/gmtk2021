@@ -62,6 +62,8 @@ shape = SubResource( 1 )
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 8 )]
 visible = false
+<<<<<<< Updated upstream
+=======
 
 [node name="spawn_references" type="Node" parent="."]
 
@@ -75,5 +77,6 @@ position = Vector2( 2008.56, 1049.59 )
 wait_time = 0.1
 autostart = true
 
+>>>>>>> Stashed changes
 [connection signal="timeout" from="YSort/Player/Camera2D/Timer" to="YSort/Player/Camera2D" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
