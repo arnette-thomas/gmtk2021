@@ -1,0 +1,171 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/terrain.jpg" type="Texture" id=2]
+[ext_resource path="res://scenes/Terrain/Champignon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Terrain/Rock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Terrain/RockLittle.tscn" type="PackedScene" id=6]
+
+[node name="Map1" type="YSort"]
+position = Vector2( -2013.02, -1174.67 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Champignon3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2863.1, -480.097 )
+
+[node name="Champignon4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2713.34, -170.217 )
+
+[node name="Champignon5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2796.1, -130.172 )
+scale = Vector2( 0.9, 0.9 )
+
+[node name="Champignon6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2822.04, -57.9847 )
+scale = Vector2( 0.6, 0.6 )
+
+[node name="Champignon8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3311.68, -460.757 )
+
+[node name="Champignon9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3634.67, 316.361 )
+rotation = 0.261799
+
+[node name="Champignon10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3501.31, 539.801 )
+rotation = 0.261799
+
+[node name="Champignon11" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3595.31, 447.401 )
+rotation = 0.261799
+scale = Vector2( 0.9, 0.9 )
+
+[node name="Champignon12" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3455.12, 362.441 )
+rotation = 0.261799
+scale = Vector2( 0.6, 0.6 )
+
+[node name="Champignon13" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3551.2, 328.961 )
+
+[node name="Rock25" parent="." instance=ExtResource( 5 )]
+position = Vector2( 882.77, 1355.06 )
+scale = Vector2( 3, 3 )
+
+[node name="Rock26" parent="." instance=ExtResource( 5 )]
+position = Vector2( 875.22, 728.334 )
+scale = Vector2( 3, 3 )
+
+[node name="Rock27" parent="." instance=ExtResource( 5 )]
+position = Vector2( 890.32, 78.9534 )
+scale = Vector2( 3, 3 )
+
+[node name="Rock28" parent="." instance=ExtResource( 5 )]
+position = Vector2( 884.429, -589.758 )
+scale = Vector2( 3, 3 )
+
+[node name="Champignon7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 5560.94, -613.737 )
+
+[node name="Rock34" parent="." instance=ExtResource( 5 )]
+position = Vector2( 4959.7, -561.347 )
+scale = Vector2( 3, 3 )
+
+[node name="Rock38" parent="." instance=ExtResource( 5 )]
+position = Vector2( 5034.64, 659.107 )
+scale = Vector2( 3, 3 )
+
+[node name="Rock40" parent="." instance=ExtResource( 5 )]
+position = Vector2( 5048.09, 1210.74 )
+scale = Vector2( 3, 3 )
+
+[node name="Rock39" parent="." instance=ExtResource( 5 )]
+position = Vector2( 5007.04, 17.2673 )
+scale = Vector2( 3, 3 )
+
+[node name="RockLittle" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1984.64, 1288.98 )
+
+[node name="RockLittle2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2264.03, 1281.43 )
+
+[node name="RockLittle18" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1654.66, 1309.47 )
+scale = Vector2( 2, 2 )
+
+[node name="RockLittle20" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1469.65, -961.635 )
+scale = Vector2( 2, 2 )
+
+[node name="RockLittle19" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4487.35, 1391.16 )
+scale = Vector2( 2, 2 )
+
+[node name="RockLittle21" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2565.15, 1350.86 )
+
+[node name="RockLittle22" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2867.19, 1365.96 )
+
+[node name="RockLittle23" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3116.38, 1358.41 )
+
+[node name="RockLittle24" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3358.01, 1365.96 )
+
+[node name="RockLittle25" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3629.84, 1358.41 )
+
+[node name="RockLittle26" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3901.68, 1352.51 )
+
+[node name="RockLittle27" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3901.68, 1352.51 )
+
+[node name="RockLittle28" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4103.5, 1352.51 )
+
+[node name="RockLittle34" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1723.3, -981.927 )
+
+[node name="RockLittle35" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1972.49, -989.477 )
+
+[node name="RockLittle37" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2214.12, -981.927 )
+
+[node name="RockLittle56" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2515.24, -904.947 )
+
+[node name="RockLittle57" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2787.08, -897.397 )
+
+[node name="RockLittle58" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3066.46, -904.947 )
+
+[node name="RockLittle59" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3338.3, -920.047 )
+
+[node name="RockLittle60" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3640.34, -904.947 )
+
+[node name="RockLittle61" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3896.34, -904.947 )
+
+[node name="RockLittle62" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4153.35, -949.357 )
+scale = Vector2( 2, 2 )
+
+[node name="terrain" type="Sprite" parent="."]
+modulate = Color( 1, 0.764706, 0.701961, 1 )
+self_modulate = Color( 0.854902, 1, 0.827451, 1 )
+position = Vector2( -20421.4, -8022.87 )
+rotation = -0.13439
+scale = Vector2( 6.01873, 7.09108 )
+texture = ExtResource( 2 )
+centered = false
+flip_h = true
+__meta__ = {
+"_edit_lock_": true
+}

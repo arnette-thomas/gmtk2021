@@ -1,21 +1,21 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/Boss.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://scenes/triggerButton.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/CameraShake.gd" type="Script" id=5]
-[ext_resource path="res://scenes/spikes.gd" type="Script" id=6]
+[ext_resource path="res://spikes.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/bossStage.gd" type="Script" id=7]
 [ext_resource path="res://sprites/boss_spritesheet.png" type="Texture" id=8]
 [ext_resource path="res://sprites/terrain.jpg" type="Texture" id=9]
-[ext_resource path="res://scenes/Terrain/Map1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Terrain/bossMap.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1341.46, 168.873 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 104.069, 74.9515 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "dash"
+[sub_resource type="Animation" id=3]
 length = 0.3
 loop = true
 step = 0.15
@@ -32,8 +32,7 @@ tracks/0/keys = {
 "values": [ 3, 4 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -47,8 +46,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "run"
+[sub_resource type="Animation" id=5]
 length = 0.6
 loop = true
 step = 0.15
@@ -65,72 +63,119 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 1 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "dash"
 
-[sub_resource type="AnimationNodeAnimation" id=6]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "idle"
 
-[sub_resource type="AnimationNodeTransition" id=7]
+[sub_resource type="AnimationNodeTransition" id=8]
 input_count = 2
 input_0/name = "idle"
 input_0/auto_advance = false
 input_1/name = "moving"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=8]
+[sub_resource type="AnimationNodeTransition" id=9]
 input_count = 2
 input_0/name = "run"
 input_0/auto_advance = false
 input_1/name = "dash"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "run"
 
-[sub_resource type="AnimationNodeBlendTree" id=10]
+[sub_resource type="AnimationNodeBlendTree" id=11]
 graph_offset = Vector2( -664.831, 63.5 )
-nodes/dashing/node = SubResource( 5 )
+nodes/dashing/node = SubResource( 6 )
 nodes/dashing/position = Vector2( -340, 420 )
-nodes/idle/node = SubResource( 6 )
+nodes/idle/node = SubResource( 7 )
 nodes/idle/position = Vector2( -340, 80 )
-nodes/idle_state/node = SubResource( 7 )
+nodes/idle_state/node = SubResource( 8 )
 nodes/idle_state/position = Vector2( 100, 140 )
-nodes/move_state/node = SubResource( 8 )
+nodes/move_state/node = SubResource( 9 )
 nodes/move_state/position = Vector2( -100, 320 )
-nodes/running/node = SubResource( 9 )
+nodes/running/node = SubResource( 10 )
 nodes/running/position = Vector2( -340, 260 )
-node_connections = [ "output", 0, "idle_state", "idle_state", 0, "idle", "idle_state", 1, "move_state", "move_state", 0, "running", "move_state", 1, "dashing" ]
+node_connections = [ "output", 0, "idle_state", "move_state", 0, "running", "move_state", 1, "dashing", "idle_state", 0, "idle", "idle_state", 1, "move_state" ]
 
-[sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 31.7187, 32.4605 )
+[sub_resource type="GDScript" id=12]
+script/source = "extends Node2D
+
+
+var isButtonPressed
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	isButtonPressed = false
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_Area2D_body_entered(body):
+	print(body)
+	if (body == get_node(\"../Boss\") && isButtonPressed == true):
+		print('Le boss est dans les piques')
+
+
+func _on_Area2D2_body_shape_entered(body_id, body, body_shape, local_shape):
+	print(body)
+	if (body == get_node(\"../Boss\")):
+		isButtonPressed = true
+		get_node(\"Sprite\").texture = load(\"res://sprites/Bouton2.png\")
+		get_node(\"../spikes\").visible = true
+		get_node(\"../spikes2\").visible = true
+		print('Le boss est sur le bouton')
+"
+
+[sub_resource type="StreamTexture" id=13]
+flags = 4
+load_path = "res://.import/Bouton1.png-fee7d67c4f1d9d4734838d9e20fbff8e.stex"
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 129.182, 97.1574 )
 
 [node name="bossStage" type="Node2D"]
 script = ExtResource( 7 )
 __meta__ = {
-"_edit_horizontal_guides_": [ -0.246616 ]
+"_edit_horizontal_guides_": [ 1051.94 ],
+"_edit_vertical_guides_": [ 2083.5 ]
 }
 
 [node name="terrain" type="Sprite" parent="."]
-position = Vector2( -7107.7, -10561.5 )
-scale = Vector2( 3.67152, 4.19087 )
+position = Vector2( -9215.41, -15098 )
+scale = Vector2( 7.80916, 9.64778 )
 texture = ExtResource( 9 )
 centered = false
 
 [node name="YSort" type="YSort" parent="."]
+position = Vector2( -948.531, 1062.89 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( -111.854, -1459.16 )
 
 [node name="Camera2D" type="Camera2D" parent="YSort/Player"]
-rotation = -0.261799
-offset = Vector2( 0, -50 )
 current = true
-zoom = Vector2( 1.5, 1.5 )
+zoom = Vector2( 3, 3 )
+limit_left = -2370
+limit_top = -1200
+limit_right = 2000
+limit_bottom = 1000
 limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
 offset_v = 1.0
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
 script = ExtResource( 5 )
 
 [node name="Tween" type="Tween" parent="YSort/Player/Camera2D"]
@@ -138,9 +183,24 @@ script = ExtResource( 5 )
 [node name="Timer" type="Timer" parent="YSort/Player/Camera2D"]
 
 [node name="Map1" parent="YSort" instance=ExtResource( 10 )]
-position = Vector2( 1102.45, -596.529 )
+
+[node name="spikes" parent="YSort" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 1.93701, -169.015 )
+
+[node name="spikes2" parent="YSort" instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 1119.48, -161.465 )
+
+[node name="SpikesColision" type="Area2D" parent="YSort"]
+position = Vector2( 293.821, 504.719 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/SpikesColision"]
+position = Vector2( 791.551, -700.588 )
+shape = SubResource( 1 )
 
 [node name="Boss" type="KinematicBody2D" parent="YSort"]
+position = Vector2( 988.894, -988.894 )
 script = ExtResource( 1 )
 target_path = NodePath("../Player")
 
@@ -154,48 +214,35 @@ frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Boss"]
 position = Vector2( 0, 19.199 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/Boss"]
-anims/dash = SubResource( 2 )
-anims/idle = SubResource( 3 )
-anims/run = SubResource( 4 )
+anims/dash = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/run = SubResource( 5 )
 
 [node name="AnimationTree" type="AnimationTree" parent="YSort/Boss"]
-tree_root = SubResource( 10 )
+tree_root = SubResource( 11 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/idle_state/current = 0
 parameters/move_state/current = 0
 
 [node name="triggerButton" type="Node2D" parent="YSort"]
-script = ExtResource( 3 )
+position = Vector2( 2143.42, -1929.16 )
+script = SubResource( 12 )
 
 [node name="Sprite" type="Sprite" parent="YSort/triggerButton"]
-position = Vector2( 669.566, -0.82412 )
-texture = ExtResource( 2 )
+position = Vector2( -8.96559, 23.4018 )
+scale = Vector2( 0.404523, 0.408175 )
+texture = SubResource( 13 )
 
-[node name="Area2D" type="Area2D" parent="YSort/triggerButton"]
+[node name="Area2D2" type="Area2D" parent="YSort/triggerButton"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/triggerButton/Area2D"]
-position = Vector2( 670.712, -0.258339 )
-shape = SubResource( 11 )
-
-[node name="spikes" type="Node2D" parent="YSort"]
-position = Vector2( 264.458, 0 )
-script = ExtResource( 6 )
-
-[node name="Sprite" type="Sprite" parent="YSort/spikes"]
-position = Vector2( -260.72, -399.659 )
-texture = ExtResource( 2 )
-
-[node name="Area2D" type="Area2D" parent="YSort/spikes"]
-position = Vector2( -599.36, -343.681 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/spikes/Area2D"]
-position = Vector2( 336.957, -56.8269 )
-shape = SubResource( 11 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/triggerButton/Area2D2"]
+position = Vector2( -10.3826, 21.7091 )
+shape = SubResource( 14 )
 
 [connection signal="timeout" from="YSort/Player/Camera2D/Timer" to="YSort/Player/Camera2D" method="_on_Timer_timeout"]
-[connection signal="body_entered" from="YSort/triggerButton/Area2D" to="YSort/triggerButton" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="YSort/spikes/Area2D" to="YSort/spikes" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="YSort/SpikesColision" to="YSort/triggerButton" method="_on_Area2D_body_entered"]
+[connection signal="body_shape_entered" from="YSort/triggerButton/Area2D2" to="YSort/triggerButton" method="_on_Area2D2_body_shape_entered"]
