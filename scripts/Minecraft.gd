@@ -6,6 +6,7 @@ class_name Minecraft
 var posrand=Vector2.ZERO
 var dir=Vector2.ZERO
 var timebfdash=5
+var is_dashing = false
 
 onready var anim_tree : AnimationTree = $AnimationTree
 onready var sprite : Sprite = $Sprite
@@ -22,7 +23,8 @@ func _ready() -> void:
 func _process(delta):
 	dir = position.direction_to(posrand).normalized()
 	
-	sprite.flip_h = (dir.x > 0)
+	if (!is_dashing):
+		sprite.flip_h = (dir.x > 0)
 	
 	var is_moving = false
 	if $Timer.time_left>1.5:
@@ -54,6 +56,7 @@ func get_random_position():
 
 
 func dash(initdir):
+	is_dashing = true
 	anim_tree.set("parameters/move_state/current", 1)
 	var totaltime = 0
 	while totaltime < 0.8:
@@ -62,6 +65,7 @@ func dash(initdir):
 		totaltime += delta
 		yield(get_tree(), "idle_frame")
 	anim_tree.set("parameters/move_state/current", 0)
+	is_dashing = false
 
 func _on_Timer_timeout():
 	posrand=get_random_position()
