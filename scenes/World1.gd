@@ -126,8 +126,11 @@ func _on_Timer_timeout():
 	enemies_alive_array = alive_enemies
 	
 	if enemies_alive_array.empty():
+		if (current_wave == waves.size):
+			pass
 		for ennemy_name in enemies_list[current_wave] :
 			var enemy_instance = return_according_instance(ennemy_name, 'random')
 			enemies_alive_array.append(enemy_instance)
 			add_child(enemy_instance)
 		current_wave += 1
+		
