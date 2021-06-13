@@ -19,10 +19,13 @@ func _ready():
 		current_gun.friendly = FRIENDLY
 		gun_visu.get_node("Sprite").texture = current_gun.image_evil
 		gun_visu.setup(FRIENDLY)
+	gun_visu.gun = current_gun
 		
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if gun_visu.gun != current_gun: 
+		gun_visu.gun = current_gun
 	
 	if target == null: return
 	gun_visu.target_position = (target.position - position).normalized()

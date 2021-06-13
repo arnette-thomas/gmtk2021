@@ -7,6 +7,7 @@ extends Node2D
 var radius := 70
 onready var boisson_au_citron := $Sprite
 var gun_position
+var gun : GunBase
 
 var target_position # vecteur normalisé de l'origin vers le target
 
@@ -33,3 +34,7 @@ func _process(delta):
 func fire():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("kick")
+	if gun != null && gun.sfx != null:
+		var sfx_node = $ShootSFX
+		(sfx_node.stream as AudioStreamRandomPitch).audio_stream = gun.sfx
+		sfx_node.play()

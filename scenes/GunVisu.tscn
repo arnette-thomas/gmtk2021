@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/gun/GunVisu.gd" type="Script" id=1]
 [ext_resource path="res://sprites/arme_basique.png" type="Texture" id=2]
@@ -19,6 +19,9 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -170, 0 ), Vector2( -160, 0 ), Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="AudioStreamRandomPitch" id=2]
+random_pitch = 1.2
+
 [node name="GunVisu" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -32,3 +35,6 @@ position = Vector2( 180, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/kick = SubResource( 1 )
+
+[node name="ShootSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 2 )
