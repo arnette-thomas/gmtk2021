@@ -16,6 +16,8 @@ const CAPTURE_GROW_SPEED = 100
 const FRIENDLY := true
 onready var chain := $Chain
 
+onready var animation = $AnimationPlayer
+
 var main_node
 
 var fire_timer := 0.0
@@ -49,6 +51,12 @@ func _process(delta):
 	# Move player, apply malus if chain tension
 	var speed = lerp(MIN_MOVE_SPEED, MOVE_SPEED, 1 - chain.get_tension())
 	move_and_collide(dir * speed * delta)
+	
+	# Play correct animation
+	if dir != Vector2.ZERO:
+		animation.play("run")
+	else:
+		animation.play("idle")
 	
 	# fire
 	fire_timer -= delta
