@@ -95,13 +95,13 @@ func fire():
 #		Globals.camera.shake(100, 0.2, 400)
 
 func change_weapon():
-	if EnemyLinked==BasicZombie:
+	if EnemyLinked is BasicZombie:
 		current_gun_index=0
-	if EnemyLinked==Rafale:
+	elif EnemyLinked is Rafale:
 		current_gun_index=2
-	if EnemyLinked==Boulet_Unique:
+	elif EnemyLinked is Boulet_Unique:
 		current_gun_index=3
-	if EnemyLinked==null:
+	else :
 		current_gun_index=4
 	current_gun = guns[current_gun_index].new()
 	current_gun.friendly = FRIENDLY		
@@ -109,13 +109,13 @@ func change_weapon():
 
 func _on_Chain_enemy_hooked(body):
 	if body is Minecraft:
-		EnemyLinked=Minecraft
-	if body is BasicZombie:
-		EnemyLinked=BasicZombie
-	if body is Rafale:
-		EnemyLinked=Rafale
-	if body is Boulet_Unique:
-		EnemyLinked=Boulet_Unique
+		EnemyLinked = body
+	elif body is BasicZombie:
+		EnemyLinked = body
+	elif body is Rafale:
+		EnemyLinked = body
+	elif body is Boulet_Unique:
+		EnemyLinked = body
 	change_weapon()
 	
 	

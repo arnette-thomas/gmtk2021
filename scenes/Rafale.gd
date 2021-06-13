@@ -9,6 +9,7 @@ var rafale_iterator = 0
 const rafale_number = 5
 const time_between_rafale = 0.2
 
+
 const reload_time = 3
 
 const rafale_move_speed = 200
@@ -21,7 +22,8 @@ func _ready():
 	move_speed = rafale_move_speed
 	current_gun = SniperClass.new()
 	gun_visu.get_node("Sprite").texture = current_gun.image
-	pass # Replace with function body.
+	current_gun.friendly = FRIENDLY
+#	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -9,12 +9,14 @@ var current_gun
 var fire_timer := 0.0
 onready var gun_visu := $GunVisu
 
+
 var main_node
 
 
 func _ready():
 	if current_gun == null:
 		current_gun = BasicGunClass.new()
+		current_gun.friendly = FRIENDLY
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

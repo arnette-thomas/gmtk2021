@@ -1,19 +1,20 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://sprites/bullet.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Bullets/Bullet.gd" type="Script" id=2]
+[ext_resource path="res://sprites/bullet_particle.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40.0223, 4.99078 )
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0, 0.986577 )
-colors = PoolColorArray( 0.184314, 0.627451, 0.615686, 1, 0.0156863, 0.211765, 0.329412, 1 )
+colors = PoolColorArray( 0.992157, 0.188235, 0.105882, 1, 0.423529, 0.0823529, 0.0823529, 1 )
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 0.0901961, 0.819608, 0.854902, 1, 0, 0, 0, 1 )
 
 [node name="Bullet" type="Node2D"]
@@ -39,15 +40,15 @@ speed_scale = 7.88
 explosiveness = 1.0
 randomness = 1.0
 lifetime_randomness = 1.0
+texture = ExtResource( 3 )
 spread = 180.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 70.0
 initial_velocity_random = 1.0
-scale_amount = 5.0
-color_ramp = SubResource( 4 )
+scale_amount = 0.04
+color_ramp = SubResource( 5 )
 
 [node name="FireParticles" type="CPUParticles2D" parent="."]
-visible = false
 emitting = false
 amount = 30
 lifetime = 0.3
@@ -56,10 +57,11 @@ explosiveness = 0.95
 randomness = 1.0
 lifetime_randomness = 0.39
 local_coords = false
+texture = ExtResource( 3 )
 gravity = Vector2( 0, 0 )
 initial_velocity = 200.0
-scale_amount = 3.0
-scale_amount_curve = SubResource( 2 )
-color_ramp = SubResource( 3 )
+scale_amount = 0.05
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
