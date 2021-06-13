@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/base_gun.gd"
 }, {
+"base": "MarginContainer",
+"class": "Menu",
+"language": "GDScript",
+"path": "res://scripts/Menu.gd"
+}, {
 "base": "Enemy",
 "class": "Minecraft",
 "language": "GDScript",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "Enemy": "",
 "GunBase": "",
 "Minecraft": "",
+"Menu": "",
 "Zombie": ""
 }
 

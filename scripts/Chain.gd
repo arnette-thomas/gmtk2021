@@ -17,6 +17,8 @@ var hooked_enemy : Enemy = null
 onready var default_line_end = line.points[1]
 onready var default_line_width = line.width
 
+var pulling = false
+
 const MIN_WIDTH = 4
 const MAX_WIDTH = 20
 
@@ -38,16 +40,21 @@ func _process(delta):
 		line.width = lerp(MAX_WIDTH, MIN_WIDTH, (to_local(hooked_enemy.position) - position).length() / hooked_enemy.max_hook_range)
 		
 		# Chain break !
-		if line_length > hooked_enemy.max_hook_range:
+		if line_length > hooked_enemy.max_hook_range && !pulling:
 			break_chain()
-		return
 		
-	if Input.is_action_just_pressed("shoot_chain") && !is_shooting:
-		var aim_dir = Vector2(Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"), Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up"))
-		var shooting_dir = aim_dir if aim_dir != Vector2.ZERO else get_local_mouse_position().normalized()
-		rotation = Vector2.RIGHT.angle_to(shooting_dir)
-		animation.play("shoot")
-		is_shooting = true
+	if Input.is_action_just_pressed("shoot_chain"):
+		# Destroy chain if an enemy is already hooked
+		if hooked_enemy != null:
+			break_chain()
+		
+		# Shoot chain if not shooting
+		elif !is_shooting:
+			var aim_dir = Vector2(Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"), Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up"))
+			var shooting_dir = aim_dir if aim_dir != Vector2.ZERO else get_local_mouse_position().normalized()
+			rotation = Vector2.RIGHT.angle_to(shooting_dir)
+			animation.play("shoot")
+			is_shooting = true
 
 func break_chain():
 	var coroutine = FreezeFrame.freeze(0.12)
@@ -65,6 +72,10 @@ func break_chain():
 	line.width = default_line_width
 	
 	emit_signal("chain_broken")
+
+func get_tension():
+	if hooked_enemy == null: return 0.0
+	return (to_local(hooked_enemy.position) - position).length() / hooked_enemy.max_hook_range
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "shoot":
@@ -87,9 +98,11 @@ func _on_Chain_body_entered(body: PhysicsBody2D):
 		# Attract enemy if not enough range
 		var diff = position - to_local(body.position)
 		while diff.length() > (body.max_hook_range * 0.75):
+			pulling = true
 			body.move_and_collide(diff.normalized() * 500 * get_process_delta_time())
 			yield(get_tree(), "idle_frame")
 			diff = position - to_local(body.position)
+		pulling = false
 		
 	elif body.is_in_group("walls"):
 		spawn_destroy_particles()
