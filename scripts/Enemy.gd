@@ -11,6 +11,8 @@ export var max_hook_range = 500
 var target = null
 export var move_speed = 100
 
+const FRIENDLY := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hp = MAX_HP

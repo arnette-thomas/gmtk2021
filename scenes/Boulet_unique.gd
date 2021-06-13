@@ -1,5 +1,6 @@
 extends Zombie
 
+class_name Boulet_Unique
 
 var delta_counter = 0
 
@@ -20,7 +21,8 @@ func _ready():
 	move_speed = rafale_move_speed
 	current_gun = EGunClass.new()
 	gun_visu.get_node("Sprite").texture = current_gun.image
-	pass # Replace with function body.
+	current_gun.friendly = FRIENDLY
+#	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
