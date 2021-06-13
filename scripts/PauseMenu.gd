@@ -36,8 +36,8 @@ func on_continue():
 	toggle_pause()
 	
 func on_options():
-	var muted = AudioManager.get_node("MusicStreamPlayer").stream_paused
-	AudioManager.get_node("MusicStreamPlayer").stream_paused = !muted
+	var muted = !AudioManager.get_node("MusicStreamPlayer").stream_paused
+	AudioManager.get_node("MusicStreamPlayer").stream_paused = muted
 	options_text.text = MUTE_TEXT if !muted else UNMUTE_TEXT
 	
 func on_exit():
