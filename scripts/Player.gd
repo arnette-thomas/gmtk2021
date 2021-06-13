@@ -97,6 +97,8 @@ func fire():
 func change_weapon():
 	if EnemyLinked is BasicZombie:
 		current_gun_index=0
+	elif EnemyLinked is shotgun:
+		current_gun_index=1
 	elif EnemyLinked is Rafale:
 		current_gun_index=2
 	elif EnemyLinked is Boulet_Unique:
@@ -115,6 +117,8 @@ func _on_Chain_enemy_hooked(body):
 	elif body is Rafale:
 		EnemyLinked = body
 	elif body is Boulet_Unique:
+		EnemyLinked = body
+	elif body is shotgun:
 		EnemyLinked = body
 	change_weapon()
 	

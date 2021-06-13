@@ -19,7 +19,8 @@ class Wave:
 		num_z_shotgun = nzsh
 
 var waves = [
-	Wave.new(0,0,0,0,1),
+	Wave.new(0,1,1,1,1),
+	Wave.new(0,0,0,0,3),
 	Wave.new(10,0,0,0,0),
 ]
 
@@ -82,7 +83,7 @@ func return_according_instance(class_name_str, given_position):
 			continue
 		'shotgun_zombie':
 			instance = zombie_scn.instance()
-			instance.set_script(rafale_zombie_script)
+			instance.set_script(shotgun_zombie_script)
 			instance.target = get_node("YSort/Player")
 			instance.main_node = self
 			continue
