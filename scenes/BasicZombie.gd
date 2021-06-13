@@ -2,7 +2,7 @@ extends Zombie
 
 class_name BasicZombie
 
-var delta_counter = 0
+var delta_counter = rand_range(0, 01)
 
 
 # Called when the node enters the scene tree for the first time.
