@@ -22,9 +22,9 @@ class Wave:
 
 var waves = [
 	Wave.new(5,1,0,0,0),
-	Wave.new(2,0,0,1,2),
+	Wave.new(2,0,0,1,1),
 	Wave.new(2,1,1,1,0),
-	Wave.new(3,2,1,2,1),
+	Wave.new(3,0,1,2,1),
 ]
 
 var current_wave = 0
