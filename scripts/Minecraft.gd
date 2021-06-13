@@ -78,6 +78,8 @@ func dash(initdir):
 		totaltime+=delta
 		if (totaltime>=0.8) || (collision&&totaltime>=0.2):
 			dashing=false
+		print (totaltime)
+		print (acceleration)
 		yield(get_tree(), "idle_frame")
 	anim_tree.set("parameters/move_state/current", 0)
 
