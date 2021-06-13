@@ -80,7 +80,7 @@ input_1/auto_advance = false
 animation = "run"
 
 [sub_resource type="AnimationNodeBlendTree" id=10]
-graph_offset = Vector2( -476, 28.5 )
+graph_offset = Vector2( -664.831, 268.092 )
 nodes/dashing/node = SubResource( 5 )
 nodes/dashing/position = Vector2( -340, 420 )
 nodes/idle/node = SubResource( 6 )
