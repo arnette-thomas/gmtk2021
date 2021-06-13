@@ -5,7 +5,7 @@ class_name Minecraft
 
 var posrand=Vector2.ZERO
 var dir=Vector2.ZERO
-var timebfdash=5
+var timebfdash=1
 var dashing = false
 
 onready var anim_tree : AnimationTree = $AnimationTree
@@ -57,6 +57,7 @@ func get_random_position():
 
 func dash(initdir):
 	dashing=true
+	anim_tree.set("parameters/move_state/current", 1)
 	var totaltime = 0
 	var direction = initdir
 	var collision = false
@@ -75,11 +76,12 @@ func dash(initdir):
 		else:
 			acceleration = acceleration/1.2
 		totaltime+=delta
-		if (totaltime>=0.4) || (collision&&totaltime>=0.2):
+		if (totaltime>=0.8) || (collision&&totaltime>=0.2):
 			dashing=false
 		print (totaltime)
 		print (acceleration)
 		yield(get_tree(), "idle_frame")
+	anim_tree.set("parameters/move_state/current", 0)
 
 func _on_Timer_timeout():
 	posrand=get_random_position()
