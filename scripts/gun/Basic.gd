@@ -8,6 +8,7 @@ const FIRING_SPEED := 0.3
 const DAMAGE := 12
 
 var image := load("res://sprites/arme_basique.png")
+var image_evil := load("res://sprites/arme_basique_evil.png")
 
 var bullet_scene := load("res://scenes/Bullets/Bullet.tscn")
 

@@ -10,6 +10,7 @@ const DAMAGE := 4
 var bullet_scene := load("res://scenes/Bullets/Bullet.tscn")
 
 var image := load("res://sprites/sniper.png")
+var image_evil := load("res://sprites/sniper_evil.png")
 
 func _init().(BULLET_SPEEEEEED, SPRAY_ANGLE, FIRING_SPEED, DAMAGE) -> void:
 	pass

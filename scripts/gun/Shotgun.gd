@@ -10,6 +10,7 @@ const BULLETS_NUMBER := 9
 
 var bullet_scene := load("res://scenes/Bullets/Bullet.tscn")
 
+var image_evil := load("res://sprites/shotgun_evil.png")
 var image := load("res://sprites/shotgun.png")
 
 func _init().(BULLET_SPEEEEEED, SPRAY_ANGLE, FIRING_SPEED, DAMAGE) -> void:

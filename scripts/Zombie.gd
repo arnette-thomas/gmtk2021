@@ -12,12 +12,14 @@ onready var gun_visu := $GunVisu
 
 var main_node
 
-
 func _ready():
 	hp = MAX_HP
 	if current_gun == null:
 		current_gun = BasicGunClass.new()
 		current_gun.friendly = FRIENDLY
+		gun_visu.get_node("Sprite").texture = current_gun.image_evil
+		gun_visu.setup(FRIENDLY)
+		
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

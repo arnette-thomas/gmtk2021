@@ -20,8 +20,8 @@ var EGunClass := load("res://scripts/gun/EnergyGun.gd")
 func _ready():
 	move_speed = rafale_move_speed
 	current_gun = EGunClass.new()
-	gun_visu.get_node("Sprite").texture = current_gun.image
 	current_gun.friendly = FRIENDLY
+	gun_visu.get_node("Sprite").texture = current_gun.image_evil
 #	pass # Replace with function body.
 
 

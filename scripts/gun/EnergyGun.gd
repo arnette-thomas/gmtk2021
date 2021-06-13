@@ -8,6 +8,7 @@ const FIRING_SPEED := 0.8
 const DAMAGE := 100
 
 var image := load("res://sprites/energyGun.png")
+var image_evil := load("res://sprites/energyGun_evil.png")
 
 var bullet_scene := load("res://scenes/Bullets/GrosseBouboule.tscn")
 
