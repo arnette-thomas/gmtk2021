@@ -74,7 +74,8 @@ func break_chain():
 	emit_signal("chain_broken")
 
 func get_tension():
-	if hooked_enemy == null: return 0.0
+	if hooked_enemy == null: 
+		return 0.0
 	return (to_local(hooked_enemy.position) - position).length() / hooked_enemy.max_hook_range
 
 func _on_AnimationPlayer_animation_finished(anim_name):
@@ -89,6 +90,7 @@ func _on_Chain_body_entered(body: PhysicsBody2D):
 	if body is Enemy:
 		animation.stop()
 		hooked_enemy = body
+		hooked_enemy.connect("about_to_free", self, "on_hooked_enemy_free")
 		line.scale.x = 1
 		coll.scale.x = 1
 		rotation = 0
@@ -122,3 +124,6 @@ func spawn_destroy_particles():
 	particles.position = line_vector / 2.0
 	particles.rotation = Vector2.RIGHT.angle_to(line_vector)
 	particles.restart()
+
+func on_hooked_enemy_free():
+	break_chain()

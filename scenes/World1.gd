@@ -19,7 +19,7 @@ class Wave:
 		num_z_shotgun = nzsh
 
 var waves = [
-	Wave.new(10,10,10,10,10),
+	Wave.new(0,0,0,0,1),
 	Wave.new(10,0,0,0,0),
 ]
 
@@ -41,6 +41,7 @@ onready var player_camera_node = get_node("YSort/Player/Camera2D")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("YSort/Player").main_node = self
+	randomize()
 
 	for wave in waves:
 		var wave_list = []
@@ -117,12 +118,13 @@ func get_random_position_outside_of_player_view():
 
 func _on_Timer_timeout():
 	var array_range = enemies_alive_array.size()
+	var alive_enemies = []
 	for i in range(array_range) :
-		if (!is_instance_valid(enemies_alive_array[i])):
-			enemies_alive_array.remove(i)
-			i -= 1
-			
-	if enemies_alive_array == [] :
+		if (is_instance_valid(enemies_alive_array[i])):
+			alive_enemies.append(enemies_alive_array[i])
+	enemies_alive_array = alive_enemies
+	
+	if enemies_alive_array.empty():
 		for ennemy_name in enemies_list[current_wave] :
 			var enemy_instance = return_according_instance(ennemy_name, 'random')
 			enemies_alive_array.append(enemy_instance)
