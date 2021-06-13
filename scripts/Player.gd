@@ -78,7 +78,7 @@ func _process(delta):
 
 		
 func fire():
-	if EnemyLinked==Minecraft:
+	if EnemyLinked is Minecraft:
 		dash(dir)
 	elif EnemyLinked==null:
 		pass
