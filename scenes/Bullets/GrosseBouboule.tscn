@@ -56,5 +56,4 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 50.0
 scale_amount = 0.15
 hue_variation_random = 1.0
-
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

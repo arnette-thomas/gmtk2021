@@ -1,9 +1,5 @@
 extends Node2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var speed : float
 
 var direction : Vector2
@@ -17,9 +13,13 @@ onready var fireParticles = $FireParticles
 
 var friendly_sprite := load("res://sprites/bullet.png")
 var evil_sprite := load("res://sprites/evil_bullet.png")
+var can_hit := true  # When false, collision logic is disabled
 
-func setup(friendly_ : float):
+var damage: float
+
+func setup(friendly_ : float, damage_: float):
 	friendly = friendly_
+	damage = damage_
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,9 +61,24 @@ func _process(delta):
 
 
 func _on_Area2D_body_entered(body):
+	if (not can_hit):
+		return
+		 
 	if body.is_in_group("walls") or body.is_in_group("terrain"):
-		particles.restart()
-		$Sprite.visible = false
-		speed = 0
-		yield(get_tree().create_timer(particles.lifetime), "timeout")
-		queue_free()
+		do_the_particle_thingy_then_kill()
+		
+	elif body.is_in_group("enemies") and friendly:
+		body.remove_hp(damage)
+		do_the_particle_thingy_then_kill()
+
+
+func do_the_particle_thingy_then_kill():
+	# Disable collisions
+	can_hit = false
+	
+	# Play explosion
+	particles.restart()
+	$Sprite.visible = false
+	speed = 0
+	yield(get_tree().create_timer(particles.lifetime), "timeout")
+	queue_free()

@@ -4,11 +4,16 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-const RADIUS := 70
+var radius := 70
 onready var boisson_au_citron := $Sprite
 var gun_position
 
 var target_position # vecteur normalisé de l'origin vers le target
+
+func setup(friendly_ : float):
+	if not friendly_ :
+		radius = 20
+		boisson_au_citron.scale /= 1.2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +22,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	gun_position = target_position * RADIUS
+	gun_position = target_position * radius
 	boisson_au_citron.position = gun_position
 	boisson_au_citron.rotation = gun_position.angle()
 	if gun_position.angle() > PI/2 || gun_position.angle() < - PI/2:

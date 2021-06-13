@@ -15,14 +15,19 @@ const rafale_move_speed = 100
 
 var EGunClass := load("res://scripts/gun/EnergyGun.gd")
 
+var vener_sprite := load("res://sprites/zombie_vener_spritesheet.png")
+const VENER_COLL_Y_OFFSET_PX = 215
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	move_speed = rafale_move_speed
 	current_gun = EGunClass.new()
-	gun_visu.get_node("Sprite").texture = current_gun.image
 	current_gun.friendly = FRIENDLY
-#	pass # Replace with function body.
+	gun_visu.get_node("Sprite").texture = current_gun.image_evil
+	$Sprite.texture = vener_sprite
+	$CollisionShape2D.move_local_y(VENER_COLL_Y_OFFSET_PX * $Sprite.scale.y)
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

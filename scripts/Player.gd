@@ -123,6 +123,8 @@ func _on_Chain_enemy_hooked(body):
 		EnemyLinked = body
 	elif body is Boulet_Unique:
 		EnemyLinked = body
+	elif body is shotgun:
+		EnemyLinked = body
 	change_weapon()
 	
 	

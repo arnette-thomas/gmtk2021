@@ -1,18 +1,12 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scripts/CameraShake.gd" type="Script" id=3]
-[ext_resource path="res://scenes/Zombie.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Terrain/Map1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sprites/terrain.jpg" type="Texture" id=6]
 [ext_resource path="res://scenes/World1.gd" type="Script" id=7]
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/Rafale.gd" type="Script" id=9]
-[ext_resource path="res://scenes/Boulet_unique.gd" type="Script" id=10]
-[ext_resource path="res://scenes/BasicZombie.gd" type="Script" id=11]
-[ext_resource path="res://scenes/Minecraft.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/Shotgun.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 541.003, 31.4458 )
@@ -21,54 +15,36 @@ extents = Vector2( 541.003, 31.4458 )
 script = ExtResource( 7 )
 
 [node name="terrain" type="Sprite" parent="."]
-position = Vector2( 0, 9.44733 )
+position = Vector2( -2505.4, -1390.78 )
 texture = ExtResource( 6 )
+centered = false
 
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Map1" parent="YSort" instance=ExtResource( 5 )]
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 4.00452, -9.34388 )
+position = Vector2( 3.973, -9.344 )
 
 [node name="Camera2D" type="Camera2D" parent="YSort/Player"]
-rotation = -0.261799
 offset = Vector2( 0, -50 )
 current = true
 zoom = Vector2( 1.5, 1.5 )
+limit_left = -3000
+limit_top = -1500
+limit_right = 3000
+limit_bottom = 1500
 limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
 offset_v = 1.0
+editor_draw_limits = true
 script = ExtResource( 3 )
 
 [node name="Tween" type="Tween" parent="YSort/Player/Camera2D"]
 
 [node name="Timer" type="Timer" parent="YSort/Player/Camera2D"]
-
-[node name="BasicZombie" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( -208.153, 208.696 )
-script = ExtResource( 11 )
-target_path = NodePath("../Player")
-
-[node name="Rafale" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 486.312, -112.339 )
-script = ExtResource( 9 )
-target_path = NodePath("../Player")
-
-[node name="BouletUnique" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 327.392, 8.43938 )
-script = ExtResource( 10 )
-target_path = NodePath("../Player")
-
-[node name="Minecraft" parent="YSort" instance=ExtResource( 12 )]
-position = Vector2( -3.77557, -232.193 )
-
-[node name="Shotgun" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 55.9058, 178.374 )
-script = ExtResource( 13 )
-target_path = NodePath("../Player")
 
 [node name="Wall" type="StaticBody2D" parent="." groups=[
 "walls",
@@ -87,4 +63,17 @@ shape = SubResource( 1 )
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 8 )]
 visible = false
 
+[node name="spawn_references" type="Node" parent="."]
+
+[node name="spawn_min" type="Position2D" parent="spawn_references"]
+position = Vector2( -2219.99, -1208.16 )
+
+[node name="spawn_max" type="Position2D" parent="spawn_references"]
+position = Vector2( 2008.56, 1049.59 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="timeout" from="YSort/Player/Camera2D/Timer" to="YSort/Player/Camera2D" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
