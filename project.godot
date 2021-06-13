@@ -55,11 +55,6 @@ _global_script_classes=[ {
 "path": "res://scripts/Zombie.gd"
 }, {
 "base": "Zombie",
-"class": "boulet_unique",
-"language": "GDScript",
-"path": "res://scenes/Boulet_unique.gd"
-}, {
-"base": "Zombie",
 "class": "shotgun",
 "language": "GDScript",
 "path": "res://scenes/Shotgun.gd"
@@ -74,7 +69,6 @@ _global_script_class_icons={
 "Minecraft": "",
 "Rafale": "",
 "Zombie": "",
-"boulet_unique": "",
 "shotgun": ""
 }
 
