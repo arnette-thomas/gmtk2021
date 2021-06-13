@@ -7,6 +7,8 @@ var posrand=Vector2.ZERO
 var dir=Vector2.ZERO
 var timebfdash=5
 
+onready var anim_tree : AnimationTree = $AnimationTree
+onready var sprite : Sprite = $Sprite
 onready var spawn_min = get_node("/root/World1/spawn_references/spawn_min")
 onready var spawn_max = get_node("/root/World1/spawn_references/spawn_max")
 
@@ -19,10 +21,19 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	dir = position.direction_to(posrand).normalized()
+	
+	sprite.flip_h = (dir.x > 0)
+	
+	var is_moving = false
 	if $Timer.time_left>1.5:
 		if timebfdash>0:
-			move_and_collide(dir * move_speed * delta)	
+			move_and_collide(dir * move_speed * delta)
+			is_moving = true
 	
+	if is_moving:
+		anim_tree.set("parameters/idle_state/current", 1)
+	else:
+		anim_tree.set("parameters/idle_state/current", 0)
 	
 # Ancienne fonction
 #func get_random_position():
@@ -43,12 +54,14 @@ func get_random_position():
 
 
 func dash(initdir):
+	anim_tree.set("parameters/move_state/current", 1)
 	var totaltime = 0
 	while totaltime < 0.8:
 		var delta = get_process_delta_time()
 		move_and_collide(initdir * move_speed * 3 * delta)
 		totaltime += delta
 		yield(get_tree(), "idle_frame")
+	anim_tree.set("parameters/move_state/current", 0)
 
 func _on_Timer_timeout():
 	posrand=get_random_position()
