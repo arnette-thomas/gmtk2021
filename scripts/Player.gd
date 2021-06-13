@@ -151,8 +151,6 @@ func dash(initdir):
 		totaltime+=delta
 		if (totaltime>=0.4) || (collision&&totaltime>=0.2):
 			dashing=false
-		print (totaltime)
-		print (acceleration)
 		yield(get_tree(), "idle_frame")
 	
 
