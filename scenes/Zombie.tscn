@@ -61,6 +61,28 @@ shape = SubResource( 1 )
 [node name="GunVisu" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0.0523987, -29.2831 )
 
+[node name="HP_bg" type="ColorRect" parent="."]
+visible = false
+margin_left = -54.0
+margin_top = -100.0
+margin_right = 54.0
+margin_bottom = -85.0
+color = Color( 1, 0.054902, 0.054902, 0.258824 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP_bar" type="ColorRect" parent="."]
+visible = false
+margin_left = -54.0
+margin_top = -100.0
+margin_right = 54.0
+margin_bottom = -85.0
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 2 )
 anims/run = SubResource( 3 )

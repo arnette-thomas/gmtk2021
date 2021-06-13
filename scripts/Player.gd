@@ -26,9 +26,10 @@ var BasicGunClass := load("res://scripts/gun/Basic.gd")
 var ShotgunClass := load("res://scripts/gun/Shotgun.gd")
 var SniperClass := load("res://scripts/gun/Sniper.gd")
 var EnergyGunClass := load("res://scripts/gun/EnergyGun.gd")
-var guns := [BasicGunClass, ShotgunClass, SniperClass, EnergyGunClass]
+var MagicWand := load("res://scripts/gun/MagicWand.gd")
+var guns := [BasicGunClass, ShotgunClass, SniperClass, EnergyGunClass, MagicWand]
 
-var current_gun_index := 0
+var current_gun_index := 4
 var current_gun : GunBase
 var EnemyLinked
 
@@ -43,7 +44,7 @@ func _ready():
 func _process(delta):
 	# Handle inputs
 	var aim_dir = Vector2(Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"), Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up"))
-	var shooting_dir = aim_dir if aim_dir != Vector2.ZERO else get_local_mouse_position().normalized()
+	var shooting_dir = aim_dir if aim_dir != Vector2.ZERO else gun_visu.position.direction_to(get_local_mouse_position())
 	gun_visu.target_position = shooting_dir
 	dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	dir.y = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -66,19 +67,21 @@ func _process(delta):
 		fire()
 		
 	# change gun
-	if Input.is_action_just_pressed("ui_focus_next"):
-		current_gun_index += 1
-		if current_gun_index == guns.size():
-			current_gun_index = 0
-		current_gun = guns[current_gun_index].new()
-		current_gun.friendly = FRIENDLY		
-		gun_visu.get_node("Sprite").texture = current_gun.image
+#	if Input.is_action_just_pressed("ui_focus_next"):
+#		current_gun_index += 1
+#		if current_gun_index == guns.size():
+#			current_gun_index = 0
+#		current_gun = guns[current_gun_index].new()
+#		current_gun.friendly = FRIENDLY		
+#		gun_visu.get_node("Sprite").texture = current_gun.image
 		
 
 		
 func fire():
-	if EnemyLinked==Minecraft:
+	if EnemyLinked is Minecraft:
 		dash(dir)
+	elif EnemyLinked==null:
+		pass
 	else :
 		fire_timer = current_gun.reload_time
 #		var position_centered = position + Vector2.UP * 50
@@ -91,12 +94,30 @@ func fire():
 #	if Input.is_action_just_pressed("ui_accept"):
 #		Globals.camera.shake(100, 0.2, 400)
 
+func change_weapon():
+	if EnemyLinked is BasicZombie:
+		current_gun_index=0
+	elif EnemyLinked is Rafale:
+		current_gun_index=2
+	elif EnemyLinked is Boulet_Unique:
+		current_gun_index=3
+	else :
+		current_gun_index=4
+	current_gun = guns[current_gun_index].new()
+	current_gun.friendly = FRIENDLY		
+	gun_visu.get_node("Sprite").texture = current_gun.image
 
 func _on_Chain_enemy_hooked(body):
 	if body is Minecraft:
-		EnemyLinked=Minecraft
-	if body is Zombie:
-		EnemyLinked=Zombie
+		EnemyLinked = body
+	elif body is BasicZombie:
+		EnemyLinked = body
+	elif body is Rafale:
+		EnemyLinked = body
+	elif body is Boulet_Unique:
+		EnemyLinked = body
+	change_weapon()
+	
 	
 func dash(initdir):
 	var totaltime = 0
@@ -110,3 +131,4 @@ func dash(initdir):
 
 func _on_Chain_chain_broken():
 	EnemyLinked=null
+	change_weapon()

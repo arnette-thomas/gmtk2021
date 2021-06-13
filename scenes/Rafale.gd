@@ -1,6 +1,6 @@
 extends Zombie
 
-class_name rafale
+class_name Rafale
 
 var delta_counter = 0
 
@@ -8,6 +8,7 @@ var is_in_rafale = false
 var rafale_iterator = 0
 const rafale_number = 5
 const time_between_rafale = 0.2
+
 
 const reload_time = 3
 
@@ -20,8 +21,9 @@ var SniperClass := load("res://scripts/gun/Sniper.gd")
 func _ready():
 	move_speed = rafale_move_speed
 	current_gun = SniperClass.new()
-	gun_visu.get_node("Sprite").texture = current_gun.image
-	pass # Replace with function body.
+	current_gun.friendly = FRIENDLY	
+	gun_visu.get_node("Sprite").texture = current_gun.image_evil
+#	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

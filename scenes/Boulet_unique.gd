@@ -1,6 +1,6 @@
 extends Zombie
 
-class_name boulet_unique
+class_name Boulet_Unique
 
 var delta_counter = 0
 
@@ -23,7 +23,8 @@ const VENER_COLL_Y_OFFSET_PX = 215
 func _ready():
 	move_speed = rafale_move_speed
 	current_gun = EGunClass.new()
-	gun_visu.get_node("Sprite").texture = current_gun.image
+  current_gun.friendly = FRIENDLY
+	gun_visu.get_node("Sprite").texture = current_gun.image_evil
 	$Sprite.texture = vener_sprite
 	$CollisionShape2D.move_local_y(VENER_COLL_Y_OFFSET_PX * $Sprite.scale.y)
 	pass # Replace with function body.
