@@ -1,214 +1,26 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Terrain/Sapin.tscn" type="PackedScene" id=1]
-[ext_resource path="res://sprites/terrain.jpg" type="Texture" id=2]
 [ext_resource path="res://scenes/Terrain/Buisson.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Terrain/Champignon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Terrain/Rock.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Terrain/RockLittle.tscn" type="PackedScene" id=6]
 
 [node name="Map1" type="YSort"]
-
-[node name="terrain" type="Sprite" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0.454902 )
-position = Vector2( 1.62274, -2.46503 )
-scale = Vector2( 1.0058, 1.00295 )
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2( 286.938, -7.55103 )
 
 [node name="Sapin" parent="." instance=ExtResource( 1 )]
 position = Vector2( 775.248, 636.616 )
 
-[node name="Sapin2" parent="." instance=ExtResource( 1 )]
-position = Vector2( -1311.26, -102.614 )
-
-[node name="Sapin3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2006.96, 972.971 )
-
-[node name="Sapin4" parent="." instance=ExtResource( 1 )]
-position = Vector2( -227.494, -910.762 )
-
 [node name="Buisson" parent="." instance=ExtResource( 3 )]
 position = Vector2( -1235.09, 931.834 )
-
-[node name="Buisson3" parent="." instance=ExtResource( 3 )]
-position = Vector2( -1016.11, 984.997 )
-scale = Vector2( 0.589579, 0.50733 )
-
-[node name="Buisson2" parent="." instance=ExtResource( 3 )]
-position = Vector2( -1050.09, 1083.19 )
-
-[node name="Buisson4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 530.837, -317.425 )
-scale = Vector2( 0.873177, 0.666589 )
-
-[node name="Buisson5" parent="." instance=ExtResource( 3 )]
-position = Vector2( 372.444, -209.945 )
-scale = Vector2( 0.612007, 0.590859 )
 
 [node name="Champignon" parent="." instance=ExtResource( 4 )]
 position = Vector2( -2371.58, -1266.75 )
 scale = Vector2( 1.2, 1.2 )
 
-[node name="Champignon2" parent="." instance=ExtResource( 4 )]
-position = Vector2( -2241.41, -1209.6 )
-
-[node name="Champignon3" parent="." instance=ExtResource( 4 )]
-position = Vector2( -2346.39, -1131.89 )
-
-[node name="Champignon4" parent="." instance=ExtResource( 4 )]
-position = Vector2( -2338.31, -845.586 )
-
-[node name="Champignon5" parent="." instance=ExtResource( 4 )]
-position = Vector2( -2255.55, -805.541 )
-scale = Vector2( 0.9, 0.9 )
-
-[node name="Champignon6" parent="." instance=ExtResource( 4 )]
-position = Vector2( -2303.61, -746.808 )
-scale = Vector2( 0.6, 0.6 )
-
-[node name="Champignon7" parent="." instance=ExtResource( 4 )]
-position = Vector2( -1791.03, -1216.67 )
-
-[node name="Champignon8" parent="." instance=ExtResource( 4 )]
-position = Vector2( -1897.81, -1112.55 )
-
 [node name="Rock" parent="." instance=ExtResource( 5 )]
 position = Vector2( -2336.28, -1349.16 )
 
-[node name="Rock2" parent="." instance=ExtResource( 5 )]
-position = Vector2( -1999.7, -1357.64 )
-
-[node name="Rock3" parent="." instance=ExtResource( 5 )]
-position = Vector2( -1671.6, -1360.47 )
-
-[node name="Rock4" parent="." instance=ExtResource( 5 )]
-position = Vector2( -1374.62, -1363.3 )
-
-[node name="Rock5" parent="." instance=ExtResource( 5 )]
-position = Vector2( -1049.35, -1340.67 )
-
-[node name="Rock6" parent="." instance=ExtResource( 5 )]
-position = Vector2( -724.078, -1349.16 )
-
-[node name="Rock7" parent="." instance=ExtResource( 5 )]
-position = Vector2( -376.181, -1357.64 )
-
-[node name="Rock8" parent="." instance=ExtResource( 5 )]
-position = Vector2( -50.9122, -1360.47 )
-
-[node name="Rock9" parent="." instance=ExtResource( 5 )]
-position = Vector2( 274.357, -1363.3 )
-
-[node name="Rock10" parent="." instance=ExtResource( 5 )]
-position = Vector2( 605.283, -1366.13 )
-
-[node name="Rock11" parent="." instance=ExtResource( 5 )]
-position = Vector2( 936.209, -1368.96 )
-
-[node name="Rock12" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1272.79, -1371.79 )
-
-[node name="Rock13" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1598.06, -1374.62 )
-
-[node name="Rock14" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1866.76, -1343.5 )
-
-[node name="Rock15" parent="." instance=ExtResource( 5 )]
-position = Vector2( 2421.13, -1094.6 )
-scale = Vector2( 3, 3 )
-
-[node name="Rock16" parent="." instance=ExtResource( 5 )]
-position = Vector2( 2843.99, -475.42 )
-scale = Vector2( 3, 3 )
-
-[node name="Rock17" parent="." instance=ExtResource( 5 )]
-position = Vector2( 2911.95, 30.4972 )
-scale = Vector2( 3, 3 )
-
-[node name="Rock18" parent="." instance=ExtResource( 5 )]
-position = Vector2( 2911.95, 536.414 )
-scale = Vector2( 3, 3 )
-
-[node name="Rock19" parent="." instance=ExtResource( 5 )]
-position = Vector2( 2911.95, 1057.43 )
-scale = Vector2( 3, 3 )
-
-[node name="Rock20" parent="." instance=ExtResource( 5 )]
-position = Vector2( -2909.87, 1450.08 )
-scale = Vector2( 3, 3 )
-
-[node name="Rock21" parent="." instance=ExtResource( 5 )]
-position = Vector2( -2917.42, 823.352 )
-scale = Vector2( 3, 3 )
-
-[node name="Rock22" parent="." instance=ExtResource( 5 )]
-position = Vector2( -2902.32, 173.966 )
-scale = Vector2( 3, 3 )
-
-[node name="Rock23" parent="." instance=ExtResource( 5 )]
-position = Vector2( -2879.67, -437.664 )
-scale = Vector2( 3, 3 )
-
-[node name="Rock24" parent="." instance=ExtResource( 5 )]
-position = Vector2( -2947.63, -1079.5 )
-scale = Vector2( 3, 3 )
-
 [node name="RockLittle" parent="." instance=ExtResource( 6 )]
 position = Vector2( -2384, 1584 )
-
-[node name="RockLittle2" parent="." instance=ExtResource( 6 )]
-position = Vector2( -2104.61, 1576.45 )
-
-[node name="RockLittle3" parent="." instance=ExtResource( 6 )]
-position = Vector2( -1832.78, 1561.35 )
-
-[node name="RockLittle4" parent="." instance=ExtResource( 6 )]
-position = Vector2( -1530.74, 1576.45 )
-
-[node name="RockLittle5" parent="." instance=ExtResource( 6 )]
-position = Vector2( -1281.55, 1568.9 )
-
-[node name="RockLittle6" parent="." instance=ExtResource( 6 )]
-position = Vector2( -1039.92, 1576.45 )
-
-[node name="RockLittle7" parent="." instance=ExtResource( 6 )]
-position = Vector2( -768.087, 1568.9 )
-
-[node name="RockLittle8" parent="." instance=ExtResource( 6 )]
-position = Vector2( -496.251, 1576.45 )
-
-[node name="RockLittle9" parent="." instance=ExtResource( 6 )]
-position = Vector2( -216.865, 1568.9 )
-
-[node name="RockLittle10" parent="." instance=ExtResource( 6 )]
-position = Vector2( 54.9712, 1553.8 )
-
-[node name="RockLittle11" parent="." instance=ExtResource( 6 )]
-position = Vector2( 357.011, 1568.9 )
-
-[node name="RockLittle12" parent="." instance=ExtResource( 6 )]
-position = Vector2( 606.194, 1561.35 )
-
-[node name="RockLittle13" parent="." instance=ExtResource( 6 )]
-position = Vector2( 847.826, 1568.9 )
-
-[node name="RockLittle14" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1119.66, 1561.35 )
-
-[node name="RockLittle15" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1383.95, 1546.24 )
-
-[node name="RockLittle16" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1678.44, 1546.24 )
-
-[node name="RockLittle17" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1965.37, 1546.24 )
-
-[node name="RockLittle18" parent="." instance=ExtResource( 6 )]
-position = Vector2( 2358.02, 1508.49 )
-scale = Vector2( 2, 2 )
