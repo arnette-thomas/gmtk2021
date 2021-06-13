@@ -2,6 +2,10 @@ extends Enemy
 
 class_name Boss
 
+
+var phase
+
+
 var behaviourStage
 # The current behaviour of the boss
 # 1 --> is walking toward the player
@@ -14,11 +18,17 @@ var moveSpeed
 var dashDirection
 var dashSpeed
 
+onready var button = get_node("../triggerButton")
+onready var bossStage = get_node("../..")
+
+
 onready var anim_tree : AnimationTree = $AnimationTree
 onready var sprite : Sprite = $Sprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	phase = 1
+	MAX_HP = 10.0
 #	position = get_viewport_rect().size / 2
 	deltaCounter = 0
 	behaviourStage = 0
@@ -29,6 +39,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print(hp)
 	deltaCounter += delta
 	if target == null: return
 	
@@ -57,7 +68,6 @@ func _process(delta):
 				deltaCounter -= 1
 				behaviourStage = 0
 
-	pass
 	
 func bossMoveTowardPlayer(delta):
 	var dir = position.direction_to(target.position).normalized()
@@ -78,3 +88,14 @@ func bossDashing(delta):
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
 	print('Boss on button')
 	pass # Replace with function body.
+	
+func remove_hp(amnt):
+	hp -= amnt
+	if (hp <= 0):
+		phase = 2
+		hp = 99
+		button.visible = true
+		var myArray  = bossStage.enemies_alive
+		for instance in myArray:
+			instance.emit_signal("about_to_free")
+			instance.queue_free()

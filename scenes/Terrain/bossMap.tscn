@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/Terrain/RockLittle.tscn" type="PackedScene" id=6]
 
 [node name="Map1" type="YSort"]
-position = Vector2( -2013.02, -1174.67 )
+position = Vector2( -2831.19, -42.5446 )
 __meta__ = {
 "_edit_lock_": true
 }
