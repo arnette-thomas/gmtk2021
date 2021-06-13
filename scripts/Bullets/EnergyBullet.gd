@@ -33,17 +33,23 @@ func _ready():
 	flip = randi()%4
 	if friendly:
 		sprite.texture = friendly_sprite
+		
 		particles.color_ramp.set_color(0, Color("2fa09d"))
 		particles.color_ramp.set_color(1, Color("043654"))
+		
 		particles_continue.color_ramp.set_color(0, Color("2fa09d"))
 		particles_continue.color_ramp.set_color(1, Color("7c043654"))
 
 	else:
 		sprite.texture = evil_sprite
+		
 		particles.color_ramp.set_color(0, Color("fd301b"))
 		particles.color_ramp.set_color(1, Color("6c1515"))
+		
 		particles_continue.color_ramp.set_color(0, Color("fd301b"))
 		particles_continue.color_ramp.set_color(1, Color("7c6c1515"))
+		
+		speed *= 0.7
 		
 	particles_continue.restart()
 	
@@ -70,6 +76,10 @@ func _on_Area2D_body_entered(body):
 	
 	elif body.is_in_group("enemies") and friendly:
 		body.remove_hp(damage)
+		do_the_particle_thingy_then_kill()
+		
+	elif body.is_in_group("player") and not friendly:
+		body.hit()
 		do_the_particle_thingy_then_kill()
 
 

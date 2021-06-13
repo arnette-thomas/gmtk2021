@@ -18,4 +18,4 @@ func _ready():
 
 func _on_Area2D_body_entered(body):
 	if (get_node("../triggerButton").isButtonPressed == true && body == get_node("../Boss")):
-		print('ok')
+		print('le boss est allé sur les piques')

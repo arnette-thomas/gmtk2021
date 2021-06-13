@@ -19,7 +19,7 @@ onready var sprite : Sprite = $Sprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	position = get_viewport_rect().size / 2
+#	position = get_viewport_rect().size / 2
 	deltaCounter = 0
 	behaviourStage = 0
 	moveSpeed = 200

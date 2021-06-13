@@ -3,6 +3,8 @@ extends Node2D
 var enemies_alive_array = []
 var enemies_list = []
 
+var spawn_radius := 600
+
 # the position are absolute to the terrain
 class Wave:
 	var num_vaches: int
@@ -19,8 +21,10 @@ class Wave:
 		num_z_shotgun = nzsh
 
 var waves = [
-	Wave.new(5,1,0,0,0),
-#	Wave.new(0,1,0,0,0),
+	Wave.new(10,1,0,0,0),
+	Wave.new(0,0,4,0,0),
+	Wave.new(0,0,0,4,0),
+	Wave.new(0,4,0,0,0),
 ]
 
 var current_wave = 0
@@ -110,7 +114,7 @@ func get_random_position_outside_of_player_view():
 	var rand_pos = Vector2(randi()%(x_max - x_min) + x_min,randi()%(y_max - y_min) + y_min)
 	
 	# Pour éviter que le point spawn dans la vision du joueur
-	while (get_viewport_rect().has_point(rand_pos)):
+	while (player_node.position.distance_to(rand_pos) < spawn_radius):
 		rand_pos = Vector2(randi()%(x_max - x_min) + x_min,randi()%(y_max - y_min) + y_min)
 	
 	return rand_pos
@@ -130,7 +134,8 @@ func _on_Timer_timeout():
 		else:
 			for ennemy_name in enemies_list[current_wave] :
 				var enemy_instance = return_according_instance(ennemy_name, 'random')
-				enemies_alive_array.append(enemy_instance)
+				if (ennemy_name != 'minecraft') :
+					enemies_alive_array.append(enemy_instance)
 				add_child(enemy_instance)
 			current_wave += 1
 
