@@ -57,6 +57,14 @@ func _process(delta):
 			is_shooting = true
 
 func break_chain():
+	if (hooked_enemy.is_connected("about_to_free", self, "on_hooked_enemy_free")):
+		hooked_enemy.disconnect("about_to_free", self, "on_hooked_enemy_free")
+	hooked_enemy = null
+	line.scale.x = 0
+	coll.scale.x = 0
+	line.points[1] = default_line_end
+	line.width = default_line_width
+	
 	var coroutine = FreezeFrame.freeze(0.12)
 	yield(coroutine, "completed")
 	
@@ -64,12 +72,6 @@ func break_chain():
 	
 	# particles
 	spawn_destroy_particles()
-	
-	hooked_enemy = null
-	line.scale.x = 0
-	coll.scale.x = 0
-	line.points[1] = default_line_end
-	line.width = default_line_width
 	
 	emit_signal("chain_broken")
 
