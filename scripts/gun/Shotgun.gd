@@ -21,11 +21,18 @@ func _init().(BULLET_SPEEEEEED, SPRAY_ANGLE, FIRING_SPEED, DAMAGE, sfx_) -> void
 func generate_bullets(position : Vector2, direction : Vector2) -> Array:
 	Globals.camera.shake(500, 0.2, 500)
 	var bullet_instances = Array()
-	for i in BULLETS_NUMBER:
+	var bullets_number
+	if friendly:
+		bullets_number = BULLETS_NUMBER
+	else:
+		bullets_number = BULLETS_NUMBER / 2
+		
+	for i in bullets_number:
 		var bullet_instance = bullet_scene.instance()
 		bullet_instance.speed = velocity
-		bullet_instance.setup(friendly, damage)
 		bullet_instance.direction = direction.rotated(rand_range(-spray_angle/2, spray_angle/2))
 		bullet_instance.position = position
 		bullet_instances.append(bullet_instance)
+		bullet_instance.setup(friendly, damage)		
+		bullet_instance.speed *= 0.8
 	return bullet_instances

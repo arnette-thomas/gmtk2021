@@ -20,8 +20,8 @@ func _init().(BULLET_SPEEEEEED, SPRAY_ANGLE, FIRING_SPEED, DAMAGE, sfx_) -> void
 func generate_bullets(position : Vector2, direction : Vector2) -> Array:
 	Globals.camera.shake(700, 0.1, 700)
 	var bullet_instance = bullet_scene.instance()
-	bullet_instance.setup(friendly, damage)
 	bullet_instance.speed = velocity
 	bullet_instance.direction = direction.rotated(rand_range(-spray_angle/2, spray_angle/2))
 	bullet_instance.position = position
+	bullet_instance.setup(friendly, damage)
 	return [bullet_instance]

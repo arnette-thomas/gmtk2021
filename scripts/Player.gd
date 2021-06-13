@@ -1,19 +1,20 @@
 extends KinematicBody2D
 
+var GAVE_OVER_SCENE = load("res://scenes/GameOverCard.tscn")
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-const MOVE_SPEED := 400
-const MIN_MOVE_SPEED := 200
+const MOVE_SPEED := 700
+const MIN_MOVE_SPEED := 550
 var dir := Vector2.ZERO
-var dashing=false
+var dashing = false
 
 onready var gun_visu := $GunVisu
 
 const CAPTURE_RANGE = 150
 var capture_curr_range = 0
-const CAPTURE_GROW_SPEED = 100
+const CAPTURE_GROW_SPEED = 300
 const FRIENDLY := true
 onready var chain := $Chain
 
@@ -142,6 +143,8 @@ func dash(initdir):
 		if currentcollision==null:
 			pass
 		else:
+			if currentcollision.collider.is_in_group("enemies"):
+				currentcollision.collider.remove_hp(50)
 			direction=currentcollision.normal
 			totaltime=0
 			collision = true
@@ -160,3 +163,12 @@ func dash(initdir):
 func _on_Chain_chain_broken():
 	EnemyLinked=null
 	change_weapon()
+
+
+func hit():
+	if dashing: return
+	if (chain.hooked_enemy == null):
+		# Game over
+		get_tree().change_scene_to(GAVE_OVER_SCENE)
+	else:
+		chain.break_chain()

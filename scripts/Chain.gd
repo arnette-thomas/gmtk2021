@@ -19,7 +19,7 @@ onready var default_line_width = line.width
 
 var pulling = false
 
-const MIN_WIDTH = 4
+const MIN_WIDTH = 2
 const MAX_WIDTH = 20
 
 # Called when the node enters the scene tree for the first time.
@@ -52,10 +52,19 @@ func _process(delta):
 		elif !is_shooting:
 			var aim_dir = Vector2(Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"), Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up"))
 			var shooting_dir = aim_dir if aim_dir != Vector2.ZERO else get_local_mouse_position().normalized()
+#			var shooting_dir = get_local_mouse_position().normalized()
 			rotation = Vector2.RIGHT.angle_to(shooting_dir)
 			animation.play("shoot")
 			AudioManager.SFX.play("ChainShoot")
 			is_shooting = true
+
+	elif is_shooting:
+		var aim_dir = Vector2(Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"), Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up"))
+		var shooting_dir = aim_dir if aim_dir != Vector2.ZERO else get_local_mouse_position().normalized()
+#			var shooting_dir = get_local_mouse_position().normalized()
+		rotation += Vector2.RIGHT.angle_to(shooting_dir)
+	
+		
 
 func break_chain():
 	if (hooked_enemy.is_connected("about_to_free", self, "on_hooked_enemy_free")):
@@ -106,7 +115,7 @@ func _on_Chain_body_entered(body: PhysicsBody2D):
 		var diff = position - to_local(body.position)
 		while diff.length() > (body.max_hook_range * 0.75):
 			pulling = true
-			body.move_and_collide(diff.normalized() * 500 * get_process_delta_time())
+			body.move_and_collide(diff.normalized() * 1000 * get_process_delta_time())
 			yield(get_tree(), "idle_frame")
 			diff = position - to_local(body.position)
 		pulling = false

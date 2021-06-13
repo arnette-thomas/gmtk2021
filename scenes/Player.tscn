@@ -6,8 +6,8 @@
 [ext_resource path="res://scenes/GunVisu.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 14.126
-height = 15.7216
+radius = 7.32709
+height = 22.3566
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -44,7 +44,9 @@ tracks/0/keys = {
 "values": [ 1, 2, 1, 0 ]
 }
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -55,7 +57,7 @@ hframes = 3
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -21 )
+position = Vector2( 0, -26.3454 )
 shape = SubResource( 1 )
 
 [node name="Chain" parent="." instance=ExtResource( 1 )]

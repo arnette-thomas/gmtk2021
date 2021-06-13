@@ -2,12 +2,12 @@ extends Zombie
 
 class_name Boulet_Unique
 
-var delta_counter = 0
 
 var is_in_rafale = false
 var rafale_iterator = 0
 const rafale_number = 1
-const time_between_rafale = 0.2
+var time_between_rafale = 0.3 + rand_range(-0.1, 0.1)
+var delta_counter = rand_range(0 , 1)
 
 const reload_time = 3
 
