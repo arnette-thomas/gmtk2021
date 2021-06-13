@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var GAVE_OVER_SCENE = load("res://scenes/GameOverCard.tscn")
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -40,6 +41,7 @@ func _ready():
 	current_gun = guns[current_gun_index].new()
 	gun_visu.get_node("Sprite").texture = current_gun.image
 	current_gun.friendly = FRIENDLY
+	gun_visu.gun = current_gun
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -111,6 +113,7 @@ func change_weapon():
 	current_gun = guns[current_gun_index].new()
 	current_gun.friendly = FRIENDLY		
 	gun_visu.get_node("Sprite").texture = current_gun.image
+	gun_visu.gun = current_gun
 
 func _on_Chain_enemy_hooked(body):
 	if body is Minecraft:
@@ -158,3 +161,11 @@ func dash(initdir):
 func _on_Chain_chain_broken():
 	EnemyLinked=null
 	change_weapon()
+
+
+func hit():
+	if (chain.hooked_enemy == null):
+		# Game over
+		get_tree().change_scene_to(GAVE_OVER_SCENE)
+	else:
+		chain.break_chain()

@@ -77,6 +77,10 @@ func _on_Area2D_body_entered(body):
 	elif body.is_in_group("enemies") and friendly:
 		body.remove_hp(damage)
 		do_the_particle_thingy_then_kill()
+		
+	elif body.is_in_group("player") and not friendly:
+		body.hit()
+		do_the_particle_thingy_then_kill()
 
 
 func do_the_particle_thingy_then_kill():
