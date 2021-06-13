@@ -62,7 +62,10 @@ func _process(delta):
 		var aim_dir = Vector2(Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"), Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up"))
 		var shooting_dir = aim_dir if aim_dir != Vector2.ZERO else get_local_mouse_position().normalized()
 #			var shooting_dir = get_local_mouse_position().normalized()
-		rotation += Vector2.RIGHT.angle_to(shooting_dir)
+		if aim_dir == Vector2.ZERO:
+			rotation += Vector2.RIGHT.angle_to(shooting_dir)
+		else:
+			rotation = Vector2.RIGHT.angle_to(shooting_dir)
 	
 		
 
