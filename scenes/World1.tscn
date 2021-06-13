@@ -20,7 +20,7 @@ extents = Vector2( 541.003, 31.4458 )
 script = ExtResource( 7 )
 
 [node name="terrain" type="Sprite" parent="."]
-position = Vector2( 0, 7.55957 )
+position = Vector2( 0, 9.44733 )
 texture = ExtResource( 6 )
 
 [node name="YSort" type="YSort" parent="."]
@@ -63,6 +63,11 @@ target_path = NodePath("../Player")
 
 [node name="Minecraft" parent="YSort" instance=ExtResource( 12 )]
 position = Vector2( -3.77557, -232.193 )
+
+[node name="Rafale2" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 486.312, -112.339 )
+script = ExtResource( 9 )
+target_path = NodePath("../Player")
 
 [node name="Wall" type="StaticBody2D" parent="." groups=[
 "walls",
