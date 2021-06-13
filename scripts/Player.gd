@@ -143,6 +143,8 @@ func dash(initdir):
 		if currentcollision==null:
 			pass
 		else:
+			if currentcollision.collider.is_in_group("enemies"):
+				currentcollision.collider.remove_hp(50)
 			direction=currentcollision.normal
 			totaltime=0
 			collision = true
@@ -164,6 +166,7 @@ func _on_Chain_chain_broken():
 
 
 func hit():
+	if dashing: return
 	if (chain.hooked_enemy == null):
 		# Game over
 		get_tree().change_scene_to(GAVE_OVER_SCENE)
