@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="AudioManager" type="Node2D"]
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true

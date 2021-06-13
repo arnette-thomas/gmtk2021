@@ -4,17 +4,9 @@ class_name Menu
 
 var is_enabled = true
 
-var selectors = [
-	$CenterContainer/VBoxContainer/VBoxContainer/ContinueContainer/ContinueSelection,
-	$CenterContainer/VBoxContainer/VBoxContainer/OptionsContainer/OptionsSelection,
-	$CenterContainer/VBoxContainer/VBoxContainer/ExitContainer/ExitSelection
-]
+var selectors = []
 
-var actions = [
-	funcref(self, "on_continue"),
-	funcref(self, "on_options"),
-	funcref(self, "on_exit")
-]
+var actions = []
 
 const SELECTOR_TEXT = ">"
 var curr_selection = 0
@@ -28,9 +20,9 @@ func set_actions(actions_array):
 func _input(event):
 	if not is_enabled: return
 	
-	if event.is_action_pressed("up") || event.is_action_pressed("ui_up"):
+	if event.is_action_pressed("ui_up"):
 		curr_selection -= 1
-	if event.is_action_pressed("down") || event.is_action_pressed("ui_down"):
+	if event.is_action_pressed("ui_down"):
 		curr_selection += 1
 	curr_selection = fposmod(curr_selection, selectors.size())
 	
