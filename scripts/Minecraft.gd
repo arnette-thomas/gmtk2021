@@ -5,18 +5,21 @@ class_name Minecraft
 
 var posrand=Vector2.ZERO
 var dir=Vector2.ZERO
-var timebfdash=1
+var timebfdash=randi()%5
 var dashing = false
+
 
 onready var anim_tree : AnimationTree = $AnimationTree
 onready var sprite : Sprite = $Sprite
 onready var spawn_min = get_node("/root/World1/spawn_references/spawn_min")
 onready var spawn_max = get_node("/root/World1/spawn_references/spawn_max")
+var timewallking=randi()%4
 
 func _ready() -> void:
 	posrand = get_random_position()
-	MAX_HP = 30
+	MAX_HP = 100
 	hp = MAX_HP
+	$Timer.set_wait_time(randi()%9+randf())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,7 +30,7 @@ func _process(delta):
 		sprite.flip_h = (dir.x > 0)
 	
 	var is_moving = false
-	if $Timer.time_left>1.5:
+	if $Timer.time_left>timewallking:
 		if timebfdash>0:
 			move_and_collide(dir * move_speed * delta)
 			is_moving = true
@@ -84,6 +87,8 @@ func dash(initdir):
 func _on_Timer_timeout():
 	posrand=get_random_position()
 	timebfdash-=1
+	timewallking=randi()%4+randf()
+	$Timer.set_wait_time(randi()%9+randf())
 	if timebfdash <= 0:
-		timebfdash = 5
+		timebfdash = randi()%5
 		dash(dir.normalized())

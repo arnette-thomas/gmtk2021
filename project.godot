@@ -81,7 +81,7 @@ _global_script_class_icons={
 [application]
 
 config/name="gmtk2021"
-run/main_scene="res://scenes/World1.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -89,6 +89,10 @@ config/icon="res://icon.png"
 Globals="*res://scripts/Globals.gd"
 FreezeFrame="*res://scenes/FreezeFrame.tscn"
 AudioManager="*res://scenes/AudioManager.tscn"
+
+[display]
+
+window/size/width=900
 
 [input]
 

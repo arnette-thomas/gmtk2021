@@ -5,7 +5,7 @@ const BULLET_SPEEEEEED := 1201
 #const RELOAD_TIME := 0.3
 const SPRAY_ANGLE := deg2rad(4)
 const FIRING_SPEED := 0.3
-const DAMAGE := 12
+const DAMAGE := 20
 
 var image := load("res://sprites/arme_basique.png")
 var image_evil := load("res://sprites/arme_basique_evil.png")

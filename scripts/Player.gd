@@ -145,6 +145,7 @@ func dash(initdir):
 		else:
 			if currentcollision.collider.is_in_group("enemies"):
 				currentcollision.collider.remove_hp(50)
+				currentcollision.collider.knockback(acceleration*direction)
 			direction=currentcollision.normal
 			totaltime=0
 			collision = true
