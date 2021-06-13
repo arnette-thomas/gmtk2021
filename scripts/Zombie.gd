@@ -3,6 +3,7 @@ extends Enemy
 class_name Zombie
 
 var BasicGunClass := load("res://scripts/gun/Basic.gd")
+onready var animation := $AnimationPlayer
 
 var current_gun
 var fire_timer := 0.0
@@ -23,6 +24,11 @@ func _process(delta):
 	
 	var dir = position.direction_to(target.position).normalized()
 	move_and_collide(dir * move_speed * delta)
+
+	if dir != Vector2.ZERO && move_speed > 10:
+		animation.play("run")
+	else:
+		animation.play("idle")
 
 func fire():
 	fire_timer = current_gun.reload_time
