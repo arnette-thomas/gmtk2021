@@ -1,6 +1,6 @@
 extends Zombie
 
-class_name boulet_unique
+class_name Boulet_Unique
 
 var delta_counter = 0
 

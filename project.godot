@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Zombie",
+"class": "BasicZombie",
+"language": "GDScript",
+"path": "res://scenes/BasicZombie.gd"
+}, {
 "base": "Enemy",
 "class": "Boss",
 "language": "GDScript",
 "path": "res://scripts/Boss.gd"
+}, {
+"base": "Zombie",
+"class": "Boulet_Unique",
+"language": "GDScript",
+"path": "res://scenes/Boulet_unique.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Enemy",
@@ -34,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Minecraft.gd"
 }, {
+"base": "Zombie",
+"class": "Rafale",
+"language": "GDScript",
+"path": "res://scenes/Rafale.gd"
+}, {
 "base": "Enemy",
 "class": "Zombie",
 "language": "GDScript",
@@ -45,11 +60,14 @@ _global_script_classes=[ {
 "path": "res://scenes/Shotgun.gd"
 } ]
 _global_script_class_icons={
+"BasicZombie": "",
 "Boss": "",
+"Boulet_Unique": "",
 "Enemy": "",
 "GunBase": "",
 "Menu": "",
 "Minecraft": "",
+"Rafale": "",
 "Zombie": "",
 "shotgun": ""
 }

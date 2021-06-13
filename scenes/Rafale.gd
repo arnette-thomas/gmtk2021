@@ -1,6 +1,6 @@
 extends Zombie
 
-class_name rafale
+class_name Rafale
 
 var delta_counter = 0
 
