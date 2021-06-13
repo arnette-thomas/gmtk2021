@@ -90,6 +90,10 @@ Globals="*res://scripts/Globals.gd"
 FreezeFrame="*res://scenes/FreezeFrame.tscn"
 AudioManager="*res://scenes/AudioManager.tscn"
 
+[display]
+
+window/size/width=900
+
 [input]
 
 ui_left={

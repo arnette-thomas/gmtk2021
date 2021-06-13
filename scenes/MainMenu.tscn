@@ -19,13 +19,13 @@ __meta__ = {
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-margin_right = 1024.0
+margin_right = 900.0
 margin_bottom = 600.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 322.0
+margin_left = 260.0
 margin_top = 84.0
-margin_right = 701.0
+margin_right = 639.0
 margin_bottom = 516.0
 custom_constants/separation = 60
 
@@ -152,13 +152,13 @@ text = "Exit"
 
 [node name="HowToCanvas" type="CenterContainer" parent="."]
 visible = false
-margin_right = 1024.0
+margin_right = 900.0
 margin_bottom = 600.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HowToCanvas"]
-margin_left = 88.0
+margin_left = 26.0
 margin_top = 14.0
-margin_right = 936.0
+margin_right = 874.0
 margin_bottom = 585.0
 custom_constants/separation = 20
 
@@ -248,14 +248,14 @@ Make sure to be linked with someone to do so!"
 
 [node name="CreditsCanvas" type="CenterContainer" parent="."]
 visible = false
-margin_right = 1024.0
+margin_right = 900.0
 margin_bottom = 600.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CreditsCanvas"]
-margin_left = 140.0
-margin_top = 106.0
-margin_right = 884.0
-margin_bottom = 493.0
+margin_left = 63.0
+margin_top = 96.0
+margin_right = 837.0
+margin_bottom = 503.0
 custom_constants/separation = 40
 
 [node name="Label" type="Label" parent="CreditsCanvas/VBoxContainer"]
