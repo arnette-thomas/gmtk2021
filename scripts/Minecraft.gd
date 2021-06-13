@@ -15,7 +15,7 @@ onready var spawn_max = get_node("/root/World1/spawn_references/spawn_max")
 
 func _ready() -> void:
 	posrand = get_random_position()
-	MAX_HP = 1.0
+	MAX_HP = 30
 	hp = MAX_HP
 
 
@@ -78,6 +78,8 @@ func dash(initdir):
 		totaltime+=delta
 		if (totaltime>=0.8) || (collision&&totaltime>=0.2):
 			dashing=false
+		print (totaltime)
+		print (acceleration)
 		yield(get_tree(), "idle_frame")
 	anim_tree.set("parameters/move_state/current", 0)
 
