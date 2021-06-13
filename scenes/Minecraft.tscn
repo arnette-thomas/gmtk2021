@@ -1,11 +1,97 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://sprites/minecraft_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Minecraft.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 30.2699
-height = 4.61621
+radius = 32.0222
+height = 0.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "dash"
+length = 0.45
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 5, 4 ]
+}
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "dash"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "idle"
+
+[sub_resource type="AnimationNodeTransition" id=7]
+input_count = 2
+input_0/name = "idle"
+input_0/auto_advance = false
+input_1/name = "moving"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeTransition" id=8]
+input_count = 2
+input_0/name = "run"
+input_0/auto_advance = false
+input_1/name = "dash"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "run"
+
+[sub_resource type="AnimationNodeBlendTree" id=10]
+graph_offset = Vector2( -476, 28.5 )
+nodes/dashing/node = SubResource( 5 )
+nodes/dashing/position = Vector2( -340, 420 )
+nodes/idle/node = SubResource( 6 )
+nodes/idle/position = Vector2( -340, 80 )
+nodes/idle_state/node = SubResource( 7 )
+nodes/idle_state/position = Vector2( 100, 140 )
+nodes/move_state/node = SubResource( 8 )
+nodes/move_state/position = Vector2( -100, 320 )
+nodes/running/node = SubResource( 9 )
+nodes/running/position = Vector2( -340, 260 )
+node_connections = [ "output", 0, "idle_state", "idle_state", 0, "idle", "idle_state", 1, "move_state", "move_state", 0, "running", "move_state", 1, "dashing" ]
 
 [node name="Minecraft" type="KinematicBody2D" groups=[
 "enemies",
@@ -14,16 +100,32 @@ script = ExtResource( 2 )
 max_hook_range = 300
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 0, -32 )
+position = Vector2( -10, -32 )
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
+hframes = 3
+vframes = 2
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.0891113, -21.5432 )
+position = Vector2( 0, -30 )
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/dash = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/run = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 10 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/idle_state/current = 0
+parameters/move_state/current = 0
+
 [connection signal="ready" from="Timer" to="." method="_on_Timer_ready"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
