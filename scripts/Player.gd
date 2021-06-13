@@ -28,6 +28,7 @@ var guns := [BasicGunClass, ShotgunClass, SniperClass, EnergyGunClass]
 
 var current_gun_index := 0
 var current_gun : GunBase
+var EnemyLinked
 
 
 # Called when the node enters the scene tree for the first time.
@@ -67,16 +68,36 @@ func _process(delta):
 
 		
 func fire():
-	fire_timer = current_gun.reload_time
-#	var position_centered = position + Vector2.UP * 50
-	var position_centered = gun_visu.get_node("Sprite/bout_du_gun").global_position
-	gun_visu.fire()
-	var bullets = current_gun.generate_bullets(position_centered, gun_visu.gun_position.normalized())
-	for b in bullets:
-		main_node.add_child(b)
+	if EnemyLinked==Minecraft:
+		dash(dir)
+	else :
+		fire_timer = current_gun.reload_time
+#		var position_centered = position + Vector2.UP * 50
+		var position_centered = gun_visu.get_node("Sprite/bout_du_gun").global_position
+		gun_visu.fire()
+		var bullets = current_gun.generate_bullets(position_centered, position_centered.direction_to(get_global_mouse_position()))
+		for b in bullets:
+			main_node.add_child(b)
 	
 #	if Input.is_action_just_pressed("ui_accept"):
 #		Globals.camera.shake(100, 0.2, 400)
 
-func _on_Chain_chain_touched(body):
-	pass # Replace with function body.
+
+func _on_Chain_enemy_hooked(body):
+	if body is Minecraft:
+		EnemyLinked=Minecraft
+	if body is Zombie:
+		EnemyLinked=Zombie
+	
+func dash(initdir):
+	var totaltime = 0
+	while totaltime < 0.2:
+		var delta = get_process_delta_time()
+		move_and_collide(get_local_mouse_position().normalized() * MOVE_SPEED * 3 * delta)
+		totaltime += delta
+		yield(get_tree(), "idle_frame")
+	
+
+
+func _on_Chain_chain_broken():
+	EnemyLinked=null

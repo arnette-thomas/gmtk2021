@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://scripts/Menu.gd"
 }, {
 "base": "Enemy",
+"class": "Minecraft",
+"language": "GDScript",
+"path": "res://scripts/Minecraft.gd"
+}, {
+"base": "Enemy",
 "class": "Zombie",
 "language": "GDScript",
 "path": "res://scripts/Zombie.gd"
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "Boss": "",
 "Enemy": "",
 "GunBase": "",
+"Minecraft": "",
 "Menu": "",
 "Zombie": ""
 }
