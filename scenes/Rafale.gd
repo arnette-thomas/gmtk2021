@@ -2,7 +2,6 @@ extends Zombie
 
 class_name Rafale
 
-
 var delta_counter = 0
 
 var is_in_rafale = false

@@ -1,5 +1,9 @@
 extends Menu
 
+onready var options_text = $CenterContainer/VBoxContainer/VBoxContainer/OptionsContainer/OptionsLabel as Label
+const MUTE_TEXT = "Mute"
+const UNMUTE_TEXT = "Unmute"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	is_enabled = false
@@ -32,7 +36,9 @@ func on_continue():
 	toggle_pause()
 	
 func on_options():
-	pass
+	var muted = AudioManager.get_node("MusicStreamPlayer").stream_paused
+	AudioManager.get_node("MusicStreamPlayer").stream_paused = !muted
+	options_text.text = MUTE_TEXT if !muted else UNMUTE_TEXT
 	
 func on_exit():
 	if is_enabled: toggle_pause()

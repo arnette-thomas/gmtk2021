@@ -16,6 +16,8 @@ const CAPTURE_GROW_SPEED = 100
 const FRIENDLY := true
 onready var chain := $Chain
 
+onready var animation = $AnimationPlayer
+
 var main_node
 
 var fire_timer := 0.0
@@ -41,8 +43,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Handle inputs
-	
-	gun_visu.target_position = get_local_mouse_position().normalized()
+	var aim_dir = Vector2(Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"), Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up"))
+	var shooting_dir = aim_dir if aim_dir != Vector2.ZERO else gun_visu.position.direction_to(get_local_mouse_position())
+	gun_visu.target_position = shooting_dir
 	dir.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	dir.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	if dir.length() > 1:
@@ -51,6 +54,12 @@ func _process(delta):
 	# Move player, apply malus if chain tension
 	var speed = lerp(MIN_MOVE_SPEED, MOVE_SPEED, 1 - chain.get_tension())
 	move_and_collide(dir * speed * delta)
+	
+	# Play correct animation
+	if dir != Vector2.ZERO:
+		animation.play("run")
+	else:
+		animation.play("idle")
 	
 	# fire
 	fire_timer -= delta
@@ -78,7 +87,7 @@ func fire():
 #		var position_centered = position + Vector2.UP * 50
 		var position_centered = gun_visu.get_node("Sprite/bout_du_gun").global_position
 		gun_visu.fire()
-		var bullets = current_gun.generate_bullets(position_centered, position_centered.direction_to(get_global_mouse_position()))
+		var bullets = current_gun.generate_bullets(position_centered, gun_visu.gun_position.normalized())
 		for b in bullets:
 			main_node.add_child(b)
 	
@@ -114,7 +123,7 @@ func dash(initdir):
 	var totaltime = 0
 	while totaltime < 0.2:
 		var delta = get_process_delta_time()
-		move_and_collide(get_local_mouse_position().normalized() * MOVE_SPEED * 3 * delta)
+		move_and_collide(gun_visu.target_position * MOVE_SPEED * 3 * delta)
 		totaltime += delta
 		yield(get_tree(), "idle_frame")
 	

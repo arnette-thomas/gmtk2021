@@ -1,6 +1,6 @@
 extends Zombie
 
-class_name Boulet_Unique
+class_name shotgun
 
 var delta_counter = 0
 
@@ -13,13 +13,13 @@ const reload_time = 3
 
 const rafale_move_speed = 100
 
-var EGunClass := load("res://scripts/gun/EnergyGun.gd")
+var shotgunClass := load("res://scripts/gun/shotgun.gd")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	move_speed = rafale_move_speed
-	current_gun = EGunClass.new()
+	current_gun = shotgunClass.new()
 	gun_visu.get_node("Sprite").texture = current_gun.image
 	pass # Replace with function body.
 
