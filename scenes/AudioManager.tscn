@@ -1,6 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://gmtk2021.wav" type="AudioStream" id=1]
 
 [node name="AudioManager" type="Node2D"]
+pause_mode = 2
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -6.0
 autoplay = true

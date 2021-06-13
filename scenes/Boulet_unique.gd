@@ -23,7 +23,7 @@ const VENER_COLL_Y_OFFSET_PX = 215
 func _ready():
 	move_speed = rafale_move_speed
 	current_gun = EGunClass.new()
-  current_gun.friendly = FRIENDLY
+	current_gun.friendly = FRIENDLY
 	gun_visu.get_node("Sprite").texture = current_gun.image_evil
 	$Sprite.texture = vener_sprite
 	$CollisionShape2D.move_local_y(VENER_COLL_Y_OFFSET_PX * $Sprite.scale.y)
