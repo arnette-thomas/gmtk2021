@@ -74,5 +74,6 @@ position = Vector2( 2008.56, 1049.59 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
 [connection signal="timeout" from="YSort/Player/Camera2D/Timer" to="YSort/Player/Camera2D" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
