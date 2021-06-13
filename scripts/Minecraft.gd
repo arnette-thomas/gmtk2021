@@ -15,7 +15,7 @@ onready var spawn_max = get_node("/root/World1/spawn_references/spawn_max")
 
 func _ready() -> void:
 	posrand = get_random_position()
-	MAX_HP = 30
+	MAX_HP = 100
 	hp = MAX_HP
 
 
