@@ -7,7 +7,7 @@ var MAX_HP := 100.0
 var hp : float
 
 export(NodePath) var target_path = null
-export var max_hook_range = 500
+export var max_hook_range = 800
 var target = null
 export var move_speed = 100
 

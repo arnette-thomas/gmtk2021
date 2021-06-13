@@ -28,19 +28,26 @@ func _ready():
 	rotation = direction.angle()
 	fireParticles.restart()
 	flip = randi()%4
+	
 	if friendly:
 		sprite.texture = friendly_sprite
+		
 		particles.color_ramp.set_color(0, Color("2fa09d"))
 		particles.color_ramp.set_color(1, Color("043654"))
+		
 		fireParticles.color_ramp.set_color(0, Color("2fa09d"))
 		fireParticles.color_ramp.set_color(1, Color("000000"))
-
+		
 	else:
 		sprite.texture = evil_sprite
+		
 		particles.color_ramp.set_color(0, Color("fd301b"))
 		particles.color_ramp.set_color(1, Color("6c1515"))
+		
 		fireParticles.color_ramp.set_color(0, Color("fd301b"))
 		fireParticles.color_ramp.set_color(1, Color("000000"))
+		
+		speed *= 0.7
 
 
 

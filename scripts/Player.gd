@@ -4,16 +4,16 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-const MOVE_SPEED := 400
-const MIN_MOVE_SPEED := 200
+const MOVE_SPEED := 700
+const MIN_MOVE_SPEED := 550
 var dir := Vector2.ZERO
-var dashing=false
+var dashing = false
 
 onready var gun_visu := $GunVisu
 
 const CAPTURE_RANGE = 150
 var capture_curr_range = 0
-const CAPTURE_GROW_SPEED = 100
+const CAPTURE_GROW_SPEED = 300
 const FRIENDLY := true
 onready var chain := $Chain
 
@@ -151,8 +151,6 @@ func dash(initdir):
 		totaltime+=delta
 		if (totaltime>=0.4) || (collision&&totaltime>=0.2):
 			dashing=false
-		print (totaltime)
-		print (acceleration)
 		yield(get_tree(), "idle_frame")
 	
 
