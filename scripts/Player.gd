@@ -24,9 +24,10 @@ var BasicGunClass := load("res://scripts/gun/Basic.gd")
 var ShotgunClass := load("res://scripts/gun/Shotgun.gd")
 var SniperClass := load("res://scripts/gun/Sniper.gd")
 var EnergyGunClass := load("res://scripts/gun/EnergyGun.gd")
-var guns := [BasicGunClass, ShotgunClass, SniperClass, EnergyGunClass]
+var MagicWand := load("res://scripts/gun/MagicWand.gd")
+var guns := [BasicGunClass, ShotgunClass, SniperClass, EnergyGunClass, MagicWand]
 
-var current_gun_index := 0
+var current_gun_index := 4
 var current_gun : GunBase
 var EnemyLinked
 
@@ -57,19 +58,21 @@ func _process(delta):
 		fire()
 		
 	# change gun
-	if Input.is_action_just_pressed("ui_focus_next"):
-		current_gun_index += 1
-		if current_gun_index == guns.size():
-			current_gun_index = 0
-		current_gun = guns[current_gun_index].new()
-		current_gun.friendly = FRIENDLY		
-		gun_visu.get_node("Sprite").texture = current_gun.image
+#	if Input.is_action_just_pressed("ui_focus_next"):
+#		current_gun_index += 1
+#		if current_gun_index == guns.size():
+#			current_gun_index = 0
+#		current_gun = guns[current_gun_index].new()
+#		current_gun.friendly = FRIENDLY		
+#		gun_visu.get_node("Sprite").texture = current_gun.image
 		
 
 		
 func fire():
 	if EnemyLinked==Minecraft:
 		dash(dir)
+	elif EnemyLinked==null:
+		pass
 	else :
 		fire_timer = current_gun.reload_time
 #		var position_centered = position + Vector2.UP * 50
@@ -82,12 +85,30 @@ func fire():
 #	if Input.is_action_just_pressed("ui_accept"):
 #		Globals.camera.shake(100, 0.2, 400)
 
+func change_weapon():
+	if EnemyLinked==BasicZombie:
+		current_gun_index=0
+	if EnemyLinked==Rafale:
+		current_gun_index=2
+	if EnemyLinked==Boulet_Unique:
+		current_gun_index=3
+	if EnemyLinked==null:
+		current_gun_index=4
+	current_gun = guns[current_gun_index].new()
+	current_gun.friendly = FRIENDLY		
+	gun_visu.get_node("Sprite").texture = current_gun.image
 
 func _on_Chain_enemy_hooked(body):
 	if body is Minecraft:
 		EnemyLinked=Minecraft
-	if body is Zombie:
-		EnemyLinked=Zombie
+	if body is BasicZombie:
+		EnemyLinked=BasicZombie
+	if body is Rafale:
+		EnemyLinked=Rafale
+	if body is Boulet_Unique:
+		EnemyLinked=Boulet_Unique
+	change_weapon()
+	
 	
 func dash(initdir):
 	var totaltime = 0
@@ -101,3 +122,4 @@ func dash(initdir):
 
 func _on_Chain_chain_broken():
 	EnemyLinked=null
+	change_weapon()
