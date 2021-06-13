@@ -3,11 +3,19 @@
 [ext_resource path="res://sprites/minecraft_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Minecraft.gd" type="Script" id=2]
 
+<<<<<<< HEAD
 [sub_resource type="CapsuleShape2D" id=11]
 radius = 32.0222
 height = 0.0
 
 [sub_resource type="Animation" id=12]
+=======
+[sub_resource type="CapsuleShape2D" id=12]
+radius = 32.0222
+height = 0.0
+
+[sub_resource type="Animation" id=13]
+>>>>>>> 105a79dbd5d018e9397a5cddac43e93efe1e6aed
 resource_name = "dash"
 length = 0.45
 loop = true
@@ -25,7 +33,11 @@ tracks/0/keys = {
 "values": [ 3, 5, 4 ]
 }
 
+<<<<<<< HEAD
 [sub_resource type="Animation" id=13]
+=======
+[sub_resource type="Animation" id=14]
+>>>>>>> 105a79dbd5d018e9397a5cddac43e93efe1e6aed
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -39,7 +51,11 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
+<<<<<<< HEAD
 [sub_resource type="Animation" id=14]
+=======
+[sub_resource type="Animation" id=15]
+>>>>>>> 105a79dbd5d018e9397a5cddac43e93efe1e6aed
 length = 0.6
 loop = true
 step = 0.15
@@ -56,42 +72,42 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 1 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "dash"
 
-[sub_resource type="AnimationNodeAnimation" id=6]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "idle"
 
-[sub_resource type="AnimationNodeTransition" id=7]
+[sub_resource type="AnimationNodeTransition" id=9]
 input_count = 2
 input_0/name = "idle"
 input_0/auto_advance = false
 input_1/name = "moving"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=8]
+[sub_resource type="AnimationNodeTransition" id=10]
 input_count = 2
 input_0/name = "run"
 input_0/auto_advance = false
 input_1/name = "dash"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "run"
 
-[sub_resource type="AnimationNodeBlendTree" id=10]
+[sub_resource type="AnimationNodeBlendTree" id=16]
 graph_offset = Vector2( -664.831, 268.092 )
-nodes/dashing/node = SubResource( 5 )
+nodes/dashing/node = SubResource( 7 )
 nodes/dashing/position = Vector2( -340, 420 )
-nodes/idle/node = SubResource( 6 )
+nodes/idle/node = SubResource( 8 )
 nodes/idle/position = Vector2( -340, 80 )
-nodes/idle_state/node = SubResource( 7 )
+nodes/idle_state/node = SubResource( 9 )
 nodes/idle_state/position = Vector2( 100, 140 )
-nodes/move_state/node = SubResource( 8 )
+nodes/move_state/node = SubResource( 10 )
 nodes/move_state/position = Vector2( -100, 320 )
-nodes/running/node = SubResource( 9 )
+nodes/running/node = SubResource( 11 )
 nodes/running/position = Vector2( -340, 260 )
-node_connections = [ "output", 0, "idle_state", "idle_state", 0, "idle", "idle_state", 1, "move_state", "move_state", 0, "running", "move_state", 1, "dashing" ]
+node_connections = [ "output", 0, "idle_state", "move_state", 0, "running", "move_state", 1, "dashing", "idle_state", 0, "idle", "idle_state", 1, "move_state" ]
 
 [node name="Minecraft" type="KinematicBody2D" groups=[
 "enemies",
@@ -109,19 +125,29 @@ frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -30 )
+<<<<<<< HEAD
 shape = SubResource( 11 )
+=======
+shape = SubResource( 12 )
+>>>>>>> 105a79dbd5d018e9397a5cddac43e93efe1e6aed
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+<<<<<<< HEAD
 anims/dash = SubResource( 12 )
 anims/idle = SubResource( 13 )
 anims/run = SubResource( 14 )
+=======
+anims/dash = SubResource( 13 )
+anims/idle = SubResource( 14 )
+anims/run = SubResource( 15 )
+>>>>>>> 105a79dbd5d018e9397a5cddac43e93efe1e6aed
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 10 )
+tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/idle_state/current = 0
