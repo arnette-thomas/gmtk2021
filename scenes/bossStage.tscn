@@ -13,7 +13,7 @@
 extents = Vector2( 1341.46, 168.873 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 104.069, 74.9515 )
+extents = Vector2( 136.146, 152.665 )
 
 [sub_resource type="Animation" id=3]
 length = 0.3
@@ -118,12 +118,6 @@ func _ready():
 #	pass
 
 
-func _on_Area2D_body_entered(body):
-	print(body)
-	if (body == get_node(\"../Boss\") && isButtonPressed == true):
-		print('Le boss est dans les piques')
-
-
 func _on_Area2D2_body_shape_entered(body_id, body, body_shape, local_shape):
 	print(body)
 	if (body == get_node(\"../Boss\")):
@@ -155,15 +149,14 @@ texture = ExtResource( 9 )
 centered = false
 
 [node name="YSort" type="YSort" parent="."]
-position = Vector2( -948.531, 1062.89 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( -111.854, -1459.16 )
+position = Vector2( 184.476, -112.205 )
 
 [node name="Camera2D" type="Camera2D" parent="YSort/Player"]
 current = true
 zoom = Vector2( 3, 3 )
-limit_left = -2370
+limit_left = -2402
 limit_top = -1200
 limit_right = 2000
 limit_bottom = 1000
@@ -186,21 +179,23 @@ script = ExtResource( 5 )
 
 [node name="spikes" parent="YSort" instance=ExtResource( 6 )]
 visible = false
-position = Vector2( 1.93701, -169.015 )
+position = Vector2( -835.265, 953.597 )
 
 [node name="spikes2" parent="YSort" instance=ExtResource( 6 )]
 visible = false
-position = Vector2( 1119.48, -161.465 )
+position = Vector2( 282.278, 961.147 )
 
 [node name="SpikesColision" type="Area2D" parent="YSort"]
-position = Vector2( 293.821, 504.719 )
+position = Vector2( -552.894, 1598.79 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/SpikesColision"]
 position = Vector2( 791.551, -700.588 )
 shape = SubResource( 1 )
 
-[node name="Boss" type="KinematicBody2D" parent="YSort"]
-position = Vector2( 988.894, -988.894 )
+[node name="Boss" type="KinematicBody2D" parent="YSort" groups=[
+"enemies",
+]]
+position = Vector2( 593.787, -180.721 )
 script = ExtResource( 1 )
 target_path = NodePath("../Player")
 
@@ -213,7 +208,7 @@ vframes = 2
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Boss"]
-position = Vector2( 0, 19.199 )
+position = Vector2( -1.41418, 2.22845 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="YSort/Boss"]
@@ -229,7 +224,8 @@ parameters/idle_state/current = 0
 parameters/move_state/current = 0
 
 [node name="triggerButton" type="Node2D" parent="YSort"]
-position = Vector2( 2143.42, -1929.16 )
+visible = false
+position = Vector2( 1407.08, -842.617 )
 script = SubResource( 12 )
 
 [node name="Sprite" type="Sprite" parent="YSort/triggerButton"]
@@ -243,6 +239,14 @@ texture = SubResource( 13 )
 position = Vector2( -10.3826, 21.7091 )
 shape = SubResource( 14 )
 
+[node name="positionReference" type="Node" parent="."]
+
+[node name="max_spawn" type="Position2D" parent="positionReference"]
+position = Vector2( 1436.56, 646.929 )
+
+[node name="min_spawn" type="Position2D" parent="positionReference"]
+position = Vector2( -1507.91, -994.177 )
+
 [connection signal="timeout" from="YSort/Player/Camera2D/Timer" to="YSort/Player/Camera2D" method="_on_Timer_timeout"]
-[connection signal="body_entered" from="YSort/SpikesColision" to="YSort/triggerButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="YSort/SpikesColision" to="." method="_on_SpikesColision_body_entered"]
 [connection signal="body_shape_entered" from="YSort/triggerButton/Area2D2" to="YSort/triggerButton" method="_on_Area2D2_body_shape_entered"]
