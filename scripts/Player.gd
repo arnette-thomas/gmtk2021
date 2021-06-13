@@ -7,6 +7,7 @@ extends KinematicBody2D
 const MOVE_SPEED := 400
 const MIN_MOVE_SPEED := 200
 var dir := Vector2.ZERO
+var dashing=false
 
 onready var gun_visu := $GunVisu
 
@@ -53,7 +54,8 @@ func _process(delta):
 	
 	# Move player, apply malus if chain tension
 	var speed = lerp(MIN_MOVE_SPEED, MOVE_SPEED, 1 - chain.get_tension())
-	move_and_collide(dir * speed * delta)
+	if !dashing:
+		move_and_collide(dir * speed * delta)
 	
 	# Play correct animation
 	if dir != Vector2.ZERO:
@@ -79,7 +81,8 @@ func _process(delta):
 		
 func fire():
 	if EnemyLinked is Minecraft:
-		dash(dir)
+		chain.break_chain()
+		dash(gun_visu.target_position)
 	elif EnemyLinked==null:
 		pass
 	else :
@@ -114,6 +117,8 @@ func _on_Chain_enemy_hooked(body):
 		EnemyLinked = body
 	elif body is BasicZombie:
 		EnemyLinked = body
+	elif body is shotgun:
+		EnemyLinked = body
 	elif body is Rafale:
 		EnemyLinked = body
 	elif body is Boulet_Unique:
@@ -124,11 +129,30 @@ func _on_Chain_enemy_hooked(body):
 	
 	
 func dash(initdir):
+	dashing=true
 	var totaltime = 0
-	while totaltime < 0.2:
+	var direction = initdir
+	var collision = false
+	var acceleration = 1
+	while dashing:
 		var delta = get_process_delta_time()
-		move_and_collide(gun_visu.target_position * MOVE_SPEED * 3 * delta)
-		totaltime += delta
+		var currentcollision = move_and_collide(direction * acceleration)
+		if currentcollision==null:
+			pass
+		else:
+			direction=currentcollision.normal
+			totaltime=0
+			collision = true
+			Globals.camera.shake(200, 0.1, 500)
+		if !collision:
+			acceleration = (1+totaltime*totaltime) * MOVE_SPEED * 3 * delta
+		else:
+			acceleration = acceleration/1.2
+		totaltime+=delta
+		if (totaltime>=0.4) || (collision&&totaltime>=0.2):
+			dashing=false
+		print (totaltime)
+		print (acceleration)
 		yield(get_tree(), "idle_frame")
 	
 
